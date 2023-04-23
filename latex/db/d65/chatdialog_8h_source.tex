@@ -1,0 +1,39 @@
+\hypertarget{chatdialog_8h_source}{}\doxysection{chatdialog.\+h}
+\label{chatdialog_8h_source}\index{IMClient/chatdialog.h@{IMClient/chatdialog.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef CHATDIALOG\_H}}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00002}00002 \textcolor{preprocessor}{\#define CHATDIALOG\_H}}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00006}00006 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00007}00007 \textcolor{keyword}{class }\mbox{\hyperlink{classChatDialog}{ChatDialog}};}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00008}00008 \}}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00010}\mbox{\hyperlink{classChatDialog}{00010}} \textcolor{keyword}{class }\mbox{\hyperlink{classChatDialog}{ChatDialog}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00011}00011 \{}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00012}00012     Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00013}00013 signals:}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00019}\mbox{\hyperlink{classChatDialog_a01ebb29e551b3aa2c7c5ba173e7dadd4}{00019}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{classChatDialog_a01ebb29e551b3aa2c7c5ba173e7dadd4}{SIG\_SendChatMsg}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, QString content);}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00026}\mbox{\hyperlink{classChatDialog_aad6ada97926b79dce9a8f0fbe60d73bc}{00026}}     \textcolor{keywordtype}{void} \mbox{\hyperlink{classChatDialog_aad6ada97926b79dce9a8f0fbe60d73bc}{SIG\_SendFile}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, QString filename, uint64\_t filesize);}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00027}00027 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00028}00028     \textcolor{keywordtype}{void} slot\_setInfo(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \textcolor{keyword}{const} QString\& name);}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00029}00029     \textcolor{keywordtype}{void} slot\_setUserOffline();}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00030}00030     \textcolor{keywordtype}{void} slot\_setChatMsg(QString content);}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00031}00031 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00032}00032     \textcolor{keyword}{explicit} \mbox{\hyperlink{classChatDialog}{ChatDialog}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00033}00033     \mbox{\hyperlink{classChatDialog}{\string~ChatDialog}}();}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00034}00034 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00035}00035     \textcolor{keywordtype}{void} on\_qb\_sendMsg\_clicked();}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00036}00036     \textcolor{keywordtype}{void} on\_pb\_sendFile\_clicked();}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00038}00038 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00039}00039     Ui::ChatDialog *ui;}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00040}00040     \textcolor{keywordtype}{int} m\_friendId;}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00041}00041     QString m\_friendName;}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00042}00042 \};}
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{chatdialog_8h_source_l00044}00044 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CHATDIALOG\_H}}
+
+\end{DoxyCode}

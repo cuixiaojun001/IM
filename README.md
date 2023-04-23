@@ -3,6 +3,7 @@
 ## 开发环境
 
 *   Visual Studio 2022
+*   MySQL 5.7
 
 ## 数据库设计
 
@@ -233,9 +234,77 @@ static std::map<int, std::function<void(unsigned long, const char*, int)> > m_de
 
 ### 收发信息
 
+服务器在客户端之间转发聊天请求。
+
+如果To客户端不在线，构建回复包给From
+
+```c++
+/**
+ * @brief 聊天内容请求块
+*/
+typedef struct STRU_CHAT_RQ
+{
+    typedef int PackType;
+    STRU_CHAT_RQ() :type(_DEF_PACK_CHAT_RQ), userid(0), friendid(0)
+    {
+        memset(content, 0, _DEF_CONTENT_SIZE);
+    }
+    /**
+     * @brief 数据包类型: _DEF_PACK_CHAT_RQ
+    */
+    PackType type;
+    /**
+     * @brief 用户唯一id
+    */
+    int userid;
+    /**
+     * @brief 好友id
+    */
+    int friendid;
+    /**
+     * @brief 聊天内容
+    */
+    char content[_DEF_CONTENT_SIZE];
+
+}STRU_CHAT_RQ;
+
+/**
+ * @brief 聊天内容回复块
+*/
+typedef struct STRU_CHAT_RS
+{
+    typedef int PackType;
+    STRU_CHAT_RS() :type(_DEF_PACK_CHAT_RS), userid(0), friendid(0), result(0) {}
+    /**
+     * @brief 数据包类型: _DEF_PACK_CHAT_RS
+    */
+    PackType type;
+    /**
+     * @brief 用户唯一id
+    */
+    int userid;
+    /**
+     * @brief 好友id
+    */
+    int friendid; //方便找是哪个人不在线
+    /**
+     * @brief 回复结果
+    */
+    int result;
+
+}STRU_CHAT_RS;
+```
+
+
+
 ### 离线处理
 
 > 窗口关闭事件（QCloseEvent）是当鼠标点击窗口右上角的关闭按钮时，所触发的函数。如果你没有重写virtual closeEvent(QCloseEvent\*event);这个虚函数的话，系统是默认接受关闭事件的，所以就会关闭窗体。但有的时候，我们可能需要保存文本或做一些其他的处理，旧需要重写该函数，用来在窗口关闭之前处理自己需要的事情。
+
+客户端离线向服务器发送离线请求
+
+- 服务器将map中的记录删掉
+- 服务器查询数据库，向所有好友发送好友离线通知
 
 ## Qt UI类
 

@@ -12,7 +12,7 @@ namespace net {
 	}
 	bool TcpServer::InitNet()
 	{
-		/*¼ÓÔØ¿â*/
+		/*åŠ è½½åº“*/
 		WORD wVersionRequested;
 		WSADATA wsaData;
 		int err;
@@ -43,12 +43,12 @@ namespace net {
 		}
 		else
 			printf("The Winsock 2.2 dll was found okay\n");
-		/*´´½¨Ì×½Ó×Ö*/
+		/*åˆ›å»ºå¥—æ¥å­—*/
 		if ((m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET) {
 			WSACleanup();
 			return false;
 		}
-		/*°ó¶¨IPµØÖ·*/
+		/*ç»‘å®šIPåœ°å€*/
 		sockaddr_in server_addr;
 		server_addr.sin_family = AF_INET;
 		server_addr.sin_addr.S_un.S_addr = INADDR_ANY;
@@ -57,12 +57,12 @@ namespace net {
 			UnInitNet();
 			return false;
 		}
-		/*½«Ì×½Ó×Ö¸ÄÎª¼àÌıÌ×½Ó×Ö*/
+		/*å°†å¥—æ¥å­—æ”¹ä¸ºç›‘å¬å¥—æ¥å­—*/
 		if (listen(m_socket, SOMAXCONN) == SOCKET_ERROR) {
 			UnInitNet();
 			return false;
 		}
-		/*´´½¨¼àÌıÏß³Ì*/
+		/*åˆ›å»ºç›‘å¬çº¿ç¨‹*/
 		HANDLE handle = (HANDLE)_beginthreadex(NULL, 0, &AcceptThread, this, 0, NULL);
 		if (handle) {
 			m_hThreadHandleLst.emplace_back(handle);
@@ -71,8 +71,8 @@ namespace net {
 	}
 	void TcpServer::UnInitNet()
 	{
-		m_isStop = true; // ³¢ÊÔÍË³öÏß³ÌÑ­»·
-		for (auto& it : m_hThreadHandleLst) { // »ØÊÕÏß³Ì
+		m_isStop = true; // å°è¯•é€€å‡ºçº¿ç¨‹å¾ªç¯
+		for (auto& it : m_hThreadHandleLst) { // å›æ”¶çº¿ç¨‹
 			if (it) {
 				if (WaitForSingleObject(it, 100) == WAIT_TIMEOUT) {
 					TerminateThread(it, -1);
@@ -94,7 +94,7 @@ namespace net {
 	bool TcpServer::SendData(unsigned long lSendIP, const char* buf, int nLen)
 	{
 		if (!buf || nLen <= 0) return false;
-		// TODO: ·ÀÖ¹Õ³°ü, ½â¾ö°ì·¨: ÏÈ·¢°ü´óĞ¡, ÔÙ·¢Êı¾İ°ü
+		// TODO: é˜²æ­¢ç²˜åŒ…, è§£å†³åŠæ³•: å…ˆå‘åŒ…å¤§å°, å†å‘æ•°æ®åŒ…
 		send(lSendIP, (char*)&nLen, sizeof(int), 0);
 		if (send(lSendIP, buf, nLen, 0) <= 0) return false;
 
@@ -105,18 +105,18 @@ namespace net {
 		Sleep(100);
 		SOCKET sockWaiter = m_mapThreadIdToSocket[GetCurrentThreadId()];
 		if (!sockWaiter || sockWaiter == INVALID_SOCKET) return;
-		int nPackSize = 0; // ´æ´¢°ü´óĞ¡
+		int nPackSize = 0; // å­˜å‚¨åŒ…å¤§å°
 		
 		int iResult = 0;
 		while (!m_isStop) {
-			// ÏÈ½ÓÊÜ°ü´óĞ¡ ÔÙ½ÓÊÜÊı¾İ°ü
+			// å…ˆæ¥å—åŒ…å¤§å° å†æ¥å—æ•°æ®åŒ…
 			iResult = recv(sockWaiter, (char*)&nPackSize, sizeof(int), 0);
 			if (iResult <= 0) break;
-			int offset = 0; //´Óbuf¿ªÊ¼ÆğÊ¼Æ«ÒÆ¶àÉÙ
+			int offset = 0; //ä»bufå¼€å§‹èµ·å§‹åç§»å¤šå°‘
 			char* recvbuf = new char[nPackSize];
 			while (nPackSize) {
 				if ((iResult = recv(sockWaiter, recvbuf + offset, sizeof(recvbuf), 0)) > 0) {
-					// TODO: ´¦ÀíÊı¾İ
+					// TODO: å¤„ç†æ•°æ®
 					nPackSize -= iResult;
 					offset += iResult;
 					//sockaddr_in client_addr;

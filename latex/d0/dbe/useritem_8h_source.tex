@@ -1,0 +1,41 @@
+\hypertarget{useritem_8h_source}{}\doxysection{useritem.\+h}
+\label{useritem_8h_source}\index{IMClient/useritem.h@{IMClient/useritem.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef USERITEM\_H}}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00002}00002 \textcolor{preprocessor}{\#define USERITEM\_H}}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <QWidget>}}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00006}00006 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00007}00007 \textcolor{keyword}{class }\mbox{\hyperlink{classUserItem}{UserItem}};}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00008}00008 \}}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00010}\mbox{\hyperlink{classUserItem}{00010}} \textcolor{keyword}{class }\mbox{\hyperlink{classUserItem}{UserItem}} : \textcolor{keyword}{public} QWidget}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00011}00011 \{}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00012}00012     Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00014}00014 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00015}00015     \textcolor{keyword}{explicit} \mbox{\hyperlink{classUserItem}{UserItem}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00016}00016     \mbox{\hyperlink{classUserItem}{\string~UserItem}}();}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00017}00017 signals:}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00018}00018     \textcolor{keywordtype}{void} SIG\_userItemClicked(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00019}00019 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00020}00020     \textcolor{keywordtype}{void} slot\_setInfo( \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} , QString name , \textcolor{keywordtype}{int} state = 1}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00021}00021                       ,\textcolor{keywordtype}{int} iconid = 1 , QString feeling =\textcolor{stringliteral}{"{}比较懒,啥也没写"{}});}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00022}00022     \textcolor{keywordtype}{void} slot\_setOffline();}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00023}00023 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00024}00024     Ui::UserItem *ui;}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00025}00025 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00026}00026     \textcolor{keywordtype}{int} m\_id;}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00027}00027     QString m\_name;}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00028}00028     \textcolor{keywordtype}{int} m\_state;}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00029}00029     \textcolor{keywordtype}{int} m\_iconid;}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00030}00030     QString m\_feeling;}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00031}00031 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00032}00032     \textcolor{keywordtype}{void} on\_pb\_icon\_clicked();}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00033}00033 \};}
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{useritem_8h_source_l00035}00035 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// USERITEM\_H}}
+
+\end{DoxyCode}

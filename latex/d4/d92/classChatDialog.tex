@@ -1,0 +1,203 @@
+\hypertarget{classChatDialog}{}\doxysection{Chat\+Dialog类 参考}
+\label{classChatDialog}\index{ChatDialog@{ChatDialog}}
+类 Chat\+Dialog 继承关系图\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d4/d92/classChatDialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 槽}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classChatDialog_a2733071cba46fa6a42d30523d83715bb}{slot\+\_\+set\+Info}} (int id, const QString \&name)
+\item 
+void \mbox{\hyperlink{classChatDialog_a4775a34aeb788a8f24821d45e83a153a}{slot\+\_\+set\+User\+Offline}} ()
+\item 
+void \mbox{\hyperlink{classChatDialog_a84bda9596d36706d9e8214984cb30986}{slot\+\_\+set\+Chat\+Msg}} (QString content)
+\end{DoxyCompactItemize}
+\doxysubsection*{信号}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classChatDialog_a01ebb29e551b3aa2c7c5ba173e7dadd4}{SIG\+\_\+\+Send\+Chat\+Msg}} (int id, QString content)
+\begin{DoxyCompactList}\small\item\em SIG\+\_\+\+Send\+Chat\+Msg 向好友发送聊天内容 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classChatDialog_aad6ada97926b79dce9a8f0fbe60d73bc}{SIG\+\_\+\+Send\+File}} (int id, QString filename, uint64\+\_\+t filesize)
+\begin{DoxyCompactList}\small\item\em SIG\+\_\+\+Send\+File 点击发送文件按钮向kernel发送文件信息信号 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classChatDialog_a7318765404be24d8295783767522c8f8}{Chat\+Dialog}} (QWidget $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 槽}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classChatDialog_a17bfb3667f7c4652516454caaf03970d}{on\+\_\+qb\+\_\+send\+Msg\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classChatDialog_a3ca7c196e887671a2f071aa6a780fde1}{on\+\_\+pb\+\_\+send\+File\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Chat\+Dialog $\ast$ \mbox{\hyperlink{classChatDialog_a450b4038048891ff2624506252d62de6}{ui}}
+\item 
+int \mbox{\hyperlink{classChatDialog_a0cb71c13e1488223a84c22ca6aeb6a71}{m\+\_\+friend\+Id}}
+\item 
+QString \mbox{\hyperlink{classChatDialog_a7b90d5805cf335f3cb2edacdce5cebe0}{m\+\_\+friend\+Name}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+
+
+在文件 \mbox{\hyperlink{chatdialog_8h_source}{chatdialog.\+h}} 第 \mbox{\hyperlink{chatdialog_8h_source_l00010}{10}} 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classChatDialog_a7318765404be24d8295783767522c8f8}\label{classChatDialog_a7318765404be24d8295783767522c8f8}} 
+\index{ChatDialog@{ChatDialog}!ChatDialog@{ChatDialog}}
+\index{ChatDialog@{ChatDialog}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{ChatDialog()}{ChatDialog()}}
+{\footnotesize\ttfamily Chat\+Dialog\+::\+Chat\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00024}{24}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a51f7cf3e71234b97600e5ff571493bd1}\label{classChatDialog_a51f7cf3e71234b97600e5ff571493bd1}} 
+\index{ChatDialog@{ChatDialog}!````~ChatDialog@{$\sim$ChatDialog}}
+\index{````~ChatDialog@{$\sim$ChatDialog}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$ChatDialog()}{~ChatDialog()}}
+{\footnotesize\ttfamily Chat\+Dialog\+::$\sim$\+Chat\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00031}{31}} 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classChatDialog_a3ca7c196e887671a2f071aa6a780fde1}\label{classChatDialog_a3ca7c196e887671a2f071aa6a780fde1}} 
+\index{ChatDialog@{ChatDialog}!on\_pb\_sendFile\_clicked@{on\_pb\_sendFile\_clicked}}
+\index{on\_pb\_sendFile\_clicked@{on\_pb\_sendFile\_clicked}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{on\_pb\_sendFile\_clicked}{on\_pb\_sendFile\_clicked}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::on\+\_\+pb\+\_\+send\+File\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00050}{50}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a17bfb3667f7c4652516454caaf03970d}\label{classChatDialog_a17bfb3667f7c4652516454caaf03970d}} 
+\index{ChatDialog@{ChatDialog}!on\_qb\_sendMsg\_clicked@{on\_qb\_sendMsg\_clicked}}
+\index{on\_qb\_sendMsg\_clicked@{on\_qb\_sendMsg\_clicked}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{on\_qb\_sendMsg\_clicked}{on\_qb\_sendMsg\_clicked}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::on\+\_\+qb\+\_\+send\+Msg\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00036}{36}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a01ebb29e551b3aa2c7c5ba173e7dadd4}\label{classChatDialog_a01ebb29e551b3aa2c7c5ba173e7dadd4}} 
+\index{ChatDialog@{ChatDialog}!SIG\_SendChatMsg@{SIG\_SendChatMsg}}
+\index{SIG\_SendChatMsg@{SIG\_SendChatMsg}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{SIG\_SendChatMsg}{SIG\_SendChatMsg}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::\+SIG\+\_\+\+Send\+Chat\+Msg (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{QString}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+SIG\+\_\+\+Send\+Chat\+Msg 向好友发送聊天内容 
+
+
+\begin{DoxyParams}{参数}
+{\em id} & 好友的id \\
+\hline
+{\em content} & 聊天内容buffer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classChatDialog_aad6ada97926b79dce9a8f0fbe60d73bc}\label{classChatDialog_aad6ada97926b79dce9a8f0fbe60d73bc}} 
+\index{ChatDialog@{ChatDialog}!SIG\_SendFile@{SIG\_SendFile}}
+\index{SIG\_SendFile@{SIG\_SendFile}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{SIG\_SendFile}{SIG\_SendFile}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::\+SIG\+\_\+\+Send\+File (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{QString}]{filename,  }\item[{uint64\+\_\+t}]{filesize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+SIG\+\_\+\+Send\+File 点击发送文件按钮向kernel发送文件信息信号 
+
+
+\begin{DoxyParams}{参数}
+{\em id} & 要发送给的好友的id \\
+\hline
+{\em filename} & 文件名，包括路径 \\
+\hline
+{\em filesize} & 文件大小 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classChatDialog_a84bda9596d36706d9e8214984cb30986}\label{classChatDialog_a84bda9596d36706d9e8214984cb30986}} 
+\index{ChatDialog@{ChatDialog}!slot\_setChatMsg@{slot\_setChatMsg}}
+\index{slot\_setChatMsg@{slot\_setChatMsg}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{slot\_setChatMsg}{slot\_setChatMsg}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::slot\+\_\+set\+Chat\+Msg (\begin{DoxyParamCaption}\item[{QString}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00018}{18}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a2733071cba46fa6a42d30523d83715bb}\label{classChatDialog_a2733071cba46fa6a42d30523d83715bb}} 
+\index{ChatDialog@{ChatDialog}!slot\_setInfo@{slot\_setInfo}}
+\index{slot\_setInfo@{slot\_setInfo}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{slot\_setInfo}{slot\_setInfo}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::slot\+\_\+set\+Info (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{const QString \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00006}{6}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a4775a34aeb788a8f24821d45e83a153a}\label{classChatDialog_a4775a34aeb788a8f24821d45e83a153a}} 
+\index{ChatDialog@{ChatDialog}!slot\_setUserOffline@{slot\_setUserOffline}}
+\index{slot\_setUserOffline@{slot\_setUserOffline}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{slot\_setUserOffline}{slot\_setUserOffline}}
+{\footnotesize\ttfamily void Chat\+Dialog\+::slot\+\_\+set\+User\+Offline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8cpp_source}{chatdialog.\+cpp}} 第 \mbox{\hyperlink{chatdialog_8cpp_source_l00013}{13}} 行定义.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classChatDialog_a0cb71c13e1488223a84c22ca6aeb6a71}\label{classChatDialog_a0cb71c13e1488223a84c22ca6aeb6a71}} 
+\index{ChatDialog@{ChatDialog}!m\_friendId@{m\_friendId}}
+\index{m\_friendId@{m\_friendId}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{m\_friendId}{m\_friendId}}
+{\footnotesize\ttfamily int Chat\+Dialog\+::m\+\_\+friend\+Id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8h_source}{chatdialog.\+h}} 第 \mbox{\hyperlink{chatdialog_8h_source_l00040}{40}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a7b90d5805cf335f3cb2edacdce5cebe0}\label{classChatDialog_a7b90d5805cf335f3cb2edacdce5cebe0}} 
+\index{ChatDialog@{ChatDialog}!m\_friendName@{m\_friendName}}
+\index{m\_friendName@{m\_friendName}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{m\_friendName}{m\_friendName}}
+{\footnotesize\ttfamily QString Chat\+Dialog\+::m\+\_\+friend\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8h_source}{chatdialog.\+h}} 第 \mbox{\hyperlink{chatdialog_8h_source_l00041}{41}} 行定义.
+
+\mbox{\Hypertarget{classChatDialog_a450b4038048891ff2624506252d62de6}\label{classChatDialog_a450b4038048891ff2624506252d62de6}} 
+\index{ChatDialog@{ChatDialog}!ui@{ui}}
+\index{ui@{ui}!ChatDialog@{ChatDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Chat\+Dialog$\ast$ Chat\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{chatdialog_8h_source}{chatdialog.\+h}} 第 \mbox{\hyperlink{chatdialog_8h_source_l00039}{39}} 行定义.
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+IMClient/chatdialog.\+h\item 
+IMClient/chatdialog.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,563 @@
+\hypertarget{kernel_8cpp_source}{}\doxysection{kernel.\+cpp}
+\label{kernel_8cpp_source}\index{IMClient/kernel.cpp@{IMClient/kernel.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00002}00002 \textcolor{comment}{// \#include <commdlg.h>}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00003}00003 \textcolor{preprocessor}{\#include <QFileDialog>}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00004}00004 \textcolor{preprocessor}{\#include "{}kernel.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00005}00005 \textcolor{preprocessor}{\#include "{}QMessageBox"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00006}00006 \textcolor{preprocessor}{\#include "{}qDebug"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00007}00007 \textcolor{preprocessor}{\#include "{}TcpClientMediator.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00008}00008 \textcolor{preprocessor}{\#include "{}useritem.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00009}00009 \textcolor{preprocessor}{\#include <QTextCodec>}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00010}00010 \textcolor{preprocessor}{\#include <QInputDialog>}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00011}00011 \textcolor{preprocessor}{\#include <QTime>}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00013}00013 Kernel::Kernel() : m\_uuid(0), m\_state(0)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00014}00014 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00015}00015     setProtocolMap();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00016}00016     m\_pClient = \textcolor{keyword}{new} net::TcpClientMediator;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00017}00017     connect(m\_pClient, SIGNAL(SIG\_ReadyData(ulong,\textcolor{keyword}{const} \textcolor{keywordtype}{char}*,\textcolor{keywordtype}{int})), \textcolor{keyword}{this}, SLOT(slot\_DealData(ulong,\textcolor{keyword}{const} \textcolor{keywordtype}{char}*,\textcolor{keywordtype}{int})));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00019}00019     \textcolor{keywordflow}{if} (!startServer()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00020}00020         qDebug() << \textcolor{stringliteral}{"{}连接服务器失败!"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00021}00021         \textcolor{keyword}{delete} m\_pClient;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00022}00022         exit(0);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00023}00023     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00024}00024     \textcolor{comment}{// 注册登录界面注册}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00025}00025     m\_loginDialog = \textcolor{keyword}{new} \mbox{\hyperlink{classLoginDialog}{LoginDialog}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00026}00026     connect(m\_loginDialog, SIGNAL(SIG\_LoginCommit(QString, QString)), \textcolor{keyword}{this}, SLOT(slot\_LoginCommit(QString, QString)));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00027}00027     connect(m\_loginDialog, SIGNAL(SIG\_RegisterCommit(QString,QString,QString)), \textcolor{keyword}{this}, SLOT(slot\_RegisterCommit(QString,QString,QString)));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00029}00029     m\_loginDialog-\/>showNormal();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00030}00030     \textcolor{comment}{// 好友列表界面注册}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00031}00031     m\_mainWnd = \textcolor{keyword}{new} \mbox{\hyperlink{classContactListDialog}{ContactListDialog}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00032}00032     connect(m\_mainWnd, SIGNAL(SIG\_addFriend()), \textcolor{keyword}{this}, SLOT(slot\_addFriendClicked()));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00033}00033     connect(m\_mainWnd, SIGNAL(SIG\_offLine()), \textcolor{keyword}{this}, SLOT(slot\_SendOffline()));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00034}00034 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00036}00036 Kernel::\string~Kernel()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00037}00037 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00038}00038 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00040}\mbox{\hyperlink{classKernel_a3b1172f795a20d490ca002ff6dddac6c}{00040}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classKernel_a3b1172f795a20d490ca002ff6dddac6c}{Kernel::startServer}}()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00041}00041 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00042}00042     \textcolor{keywordflow}{if} (!m\_pClient-\/>OpenNet()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00043}00043     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00044}00044 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00046}\mbox{\hyperlink{classKernel_a77298443ac5447e2a04815869f30ae71}{00046}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a77298443ac5447e2a04815869f30ae71}{Kernel::closeServer}}()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00047}00047 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00048}00048     \textcolor{keywordflow}{if} (m\_pClient)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00049}00049         m\_pClient-\/>CloseNet();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00050}00050 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00051}00051 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00052}\mbox{\hyperlink{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}{00052}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}{Kernel::setProtocolMap}}()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00053}00053 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00054}00054 \textcolor{preprocessor}{\#define XX(str, func) \{\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00055}00055 \textcolor{preprocessor}{    auto call = std::bind(\&Kernel::func, this, std::placeholders::\_1, std::placeholders::\_2, std::placeholders::\_3); \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00056}00056 \textcolor{preprocessor}{        m\_deal\_items.insert(\{ str, call \});\}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00058}00058 XX(\_DEF\_PACK\_LOGIN\_RS, \mbox{\hyperlink{classKernel_a204549737919e8ebc064a9b7ef62298d}{slot\_LoginRs}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00059}00059 XX(\_DEF\_PACK\_REGISTER\_RS, \mbox{\hyperlink{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}{slot\_RegisterRs}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00060}00060 XX(\_DEF\_PACK\_FRIEND\_INFO, \mbox{\hyperlink{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}{slot\_FriendInfoRs}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00061}00061 XX(\_DEF\_PACK\_CHAT\_RQ, \mbox{\hyperlink{classKernel_a469be53950174972d58ae6f196d27473}{slot\_ChatRq}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00062}00062 XX(\_DEF\_PACK\_CHAT\_RS, \mbox{\hyperlink{classKernel_a2e80c738deb690b807163f9d6a31ee30}{slot\_ChatRs}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00063}00063 XX(\_DEF\_PACK\_ADDFRIEND\_RQ, \mbox{\hyperlink{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}{slot\_addFriendRq}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00064}00064 XX(\_DEF\_PACK\_ADDFRIEND\_RS, \mbox{\hyperlink{classKernel_a7b391301f52d2d008f513e5cb4020f3c}{slot\_addFriendRs}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00065}00065 XX(\_DEF\_PROTOCOL\_FILE\_INFO\_RQ, slot\_DealFileInfoRq);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00066}00066 XX(\_DEF\_PROTOCOL\_FILE\_INFO\_RS, slot\_DealFileInfoRs);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00067}00067 XX(\_DEF\_PROTOCOL\_FILE\_BLOCK\_RQ, slot\_DealFileBlockRq);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00068}00068 XX(\_DEF\_PROTOCOL\_FILE\_BLOCK\_RS, slot\_DealFileBlockRs);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00069}00069 XX(\_DEF\_PACK\_OFFLINE\_RQ, \mbox{\hyperlink{classKernel_a77bce2e146702fc88f5fe593c1df2ada}{slot\_DealOffineRq}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00070}00070 \textcolor{preprocessor}{\#undef XX}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00071}00071 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00073}\mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{00073}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{Kernel::Utf8ToGB2312}}(QString \&utf8, \textcolor{keywordtype}{char} *gbbuf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00074}00074 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00075}00075     QTextCodec* gb2312 = QTextCodec::codecForName(\textcolor{stringliteral}{"{}gb2312"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00076}00076     QByteArray ba = gb2312-\/>fromUnicode(utf8);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00077}00077     strcpy\_s(gbbuf, nLen, ba.data());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00078}00078 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00080}\mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{00080}} QString \mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{Kernel::GB2312ToUtf8}}(\textcolor{keywordtype}{char} *gbbuf)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00081}00081 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00082}00082     QTextCodec* gb2312 = QTextCodec::codecForName(\textcolor{stringliteral}{"{}gb2312"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00083}00083     \textcolor{keywordflow}{return} gb2312-\/>toUnicode(gbbuf);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00084}00084 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00085}00085 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00086}\mbox{\hyperlink{classKernel_adff83ffd06f1c450798e393d2cc4101b}{00086}} std::string \mbox{\hyperlink{classKernel_adff83ffd06f1c450798e393d2cc4101b}{Kernel::GetFileName}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *path)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00087}00087 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00088}00088     \textcolor{keywordtype}{int} nlen = strlen(path);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00089}00089     \textcolor{keywordflow}{if} (nlen < 1) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00090}00090         \textcolor{keywordflow}{return} std::string();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00091}00091     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00092}00092     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = nlen -\/ 1; i >= 0; i -\/-\/) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00093}00093         \textcolor{keywordflow}{if} (path[i] == \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'} || path[i] == \textcolor{charliteral}{'/'}) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00094}00094             \textcolor{keywordflow}{return} \&path[i+1];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00095}00095         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00096}00096     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00097}00097     \textcolor{keywordflow}{return} std::string();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00098}00098 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00099}00099 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00100}\mbox{\hyperlink{classKernel_a44efeb221696f2645825839573ac3431}{00100}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a44efeb221696f2645825839573ac3431}{Kernel::DestroyInstance}}()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00101}00101 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00102}00102     \textcolor{keywordflow}{if} (m\_loginDialog) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00103}00103         m\_loginDialog-\/>hide();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00104}00104         \textcolor{keyword}{delete} m\_loginDialog;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00105}00105         m\_loginDialog = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00106}00106     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00107}00107     \textcolor{keywordflow}{if} (m\_mainWnd) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00108}00108         m\_mainWnd-\/>hide();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00109}00109         \textcolor{keyword}{delete} m\_mainWnd;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00110}00110         m\_mainWnd = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00111}00111     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00112}00112     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.begin(); it != \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.end(); ) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00113}00113         \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = it-\/>second;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00114}00114         chat-\/>close();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00115}00115         it = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.erase(it);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00116}00116         \textcolor{keyword}{delete} chat;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00117}00117         chat = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00118}00118     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00119}00119     \textcolor{keywordflow}{if} (m\_pClient) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00120}00120         m\_pClient-\/>CloseNet();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00121}00121         \textcolor{keyword}{delete} m\_pClient;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00122}00122         m\_pClient = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00123}00123     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00124}00124 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00125}00125 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00126}00126 \textcolor{comment}{// 槽函数}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00127}\mbox{\hyperlink{classKernel_a8e0dbecd3c1d2ff4dabeacb7d7eb0f5e}{00127}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a8e0dbecd3c1d2ff4dabeacb7d7eb0f5e}{Kernel::slot\_DealData}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00128}00128 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00129}00129     \textcolor{keywordtype}{int} header\_type = *(\textcolor{keywordtype}{int}*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00130}00130     qDebug() << \_\_func\_\_ << \textcolor{stringliteral}{"{} : "{}} << header\_type;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00131}00131     \textcolor{keywordflow}{if} (header\_type >= \_DEF\_PROTOCOL\_BASE \&\& header\_type <= \_DEF\_PROTOCOL\_BASE + \_DEF\_PROTOCOL\_COUNT)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00132}00132         m\_deal\_items[header\_type](lSendIP, buf, nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00133}00133 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00134}00134 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00135}00135 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00136}\mbox{\hyperlink{classKernel_a204549737919e8ebc064a9b7ef62298d}{00136}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a204549737919e8ebc064a9b7ef62298d}{Kernel::slot\_LoginRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00137}00137     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00138}00138     STRU\_LOGIN\_RS* rs = (STRU\_LOGIN\_RS *)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00139}00139     \textcolor{keywordflow}{switch}(rs-\/>result) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00140}00140     \textcolor{keywordflow}{case} user\_not\_exist:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00141}00141         QMessageBox::about(this-\/>m\_loginDialog, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}登录失败，用户不存在"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00142}00142         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00143}00143     \textcolor{keywordflow}{case} password\_error:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00144}00144         QMessageBox::about( this-\/>m\_loginDialog , \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}登录失败,密码错误"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00145}00145         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00146}00146     \textcolor{keywordflow}{case} login\_success:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00147}00147         \textcolor{comment}{// QMessageBox::about( this-\/>m\_loginDialog , "{}提示"{}, "{}登录成功"{});}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00148}00148         \textcolor{comment}{// TODO}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00149}00149         \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00150}00150             m\_loginDialog-\/>hide();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00151}00151             m\_mainWnd-\/>showNormal();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00152}00152             m\_uuid = rs-\/>userid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00153}00153         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00154}00154         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00155}00155     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00156}00156 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00157}00157 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00158}\mbox{\hyperlink{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}{00158}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}{Kernel::slot\_RegisterRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00159}00159     STRU\_REGISTER\_RS* rs = (STRU\_REGISTER\_RS*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00160}00160     \textcolor{keywordflow}{switch}(rs-\/>result) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00161}00161     \textcolor{keywordflow}{case} user\_is\_exist:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00162}00162         QMessageBox::about(this-\/>m\_loginDialog, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}注册失败, 用户已存在"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00163}00163         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00164}00164     \textcolor{keywordflow}{case} register\_success:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00165}00165         QMessageBox::about(this-\/>m\_loginDialog, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}注册成功"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00166}00166         \textcolor{comment}{// TODO}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00167}00167         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00168}00168     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00169}00169 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00170}00170 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00171}\mbox{\hyperlink{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}{00171}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}{Kernel::slot\_FriendInfoRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00172}00172 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00173}00173     STRU\_FRIEND\_INFO* info = (STRU\_FRIEND\_INFO*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00174}00174     qDebug() << \_\_func\_\_ << \textcolor{stringliteral}{"{}info.uuid: "{}} << info-\/>uuid << \textcolor{stringliteral}{"{} m\_uuid:"{}} << m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00175}00175     QString username = \mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{GB2312ToUtf8}}(info-\/>username);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00176}00176     QString feeling = \mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{GB2312ToUtf8}}(info-\/>feeling);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00177}00177     \textcolor{comment}{// 判断该用户信息是否是自己的}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00178}00178     \textcolor{keywordflow}{if}(m\_uuid == info-\/>uuid) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00179}00179         m\_mainWnd-\/>slot\_setInfo(username, 1, feeling);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00180}00180         m\_username = info-\/>username;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00181}00181         m\_feeling = info-\/>feeling;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00182}00182         m\_state = info-\/>state;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00183}00183         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00184}00184     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00185}00185     \textcolor{keywordflow}{if} (m\_mapIdToUserItem.find(info-\/>uuid) == m\_mapIdToUserItem.end()) \{ \textcolor{comment}{// 用户信息是好友的, 且还没添加到map中}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00186}00186         \mbox{\hyperlink{classUserItem}{UserItem}}* item = \textcolor{keyword}{new} \mbox{\hyperlink{classUserItem}{UserItem}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00187}00187         connect(item, SIGNAL(SIG\_userItemClicked(\textcolor{keywordtype}{int})), \textcolor{keyword}{this}, SLOT(\mbox{\hyperlink{classKernel_a773bea13586e584bb49be5d05b4ea5dc}{slot\_userItemClicked}}(\textcolor{keywordtype}{int})));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00188}00188         item-\/>slot\_setInfo(info-\/>uuid, username, info-\/>state, info-\/>iconid, feeling);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00189}00189         \textcolor{comment}{// 创建聊天}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00190}00190         \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \textcolor{keyword}{new} \mbox{\hyperlink{classChatDialog}{ChatDialog}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00191}00191         chat-\/>slot\_setInfo(info-\/>uuid, username);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00192}00192         connect(chat, SIGNAL(SIG\_SendChatMsg(\textcolor{keywordtype}{int},QString)), \textcolor{keyword}{this}, SLOT(\mbox{\hyperlink{classKernel_ae8053324f7683214e8b197ce56179e53}{slot\_SendChatMsg}}(\textcolor{keywordtype}{int},QString)));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00193}00193         connect(chat, SIGNAL(SIG\_SendFile(\textcolor{keywordtype}{int},QString,uint64\_t)), \textcolor{keyword}{this}, SLOT(\mbox{\hyperlink{classKernel_afa81914f904d8da74bda000828cc36fa}{slot\_SendFile}}(\textcolor{keywordtype}{int},QString,uint64\_t)));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00194}00194         \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[info-\/>uuid] = chat;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00195}00195         m\_mainWnd-\/>slot\_addFriend(item);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00196}00196         m\_mapIdToUserItem[info-\/>uuid] = item;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00197}00197     \} \textcolor{keywordflow}{else} \{ \textcolor{comment}{// 该好友info已经存在在好友map中，更新状态}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00198}00198         \mbox{\hyperlink{classUserItem}{UserItem}}* item = m\_mapIdToUserItem[info-\/>uuid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00199}00199         \textcolor{keywordflow}{if} (item \&\& item-\/>m\_state == 0 \&\& info-\/>state == 1) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00200}00200             qDebug() << QString(\textcolor{stringliteral}{"{}用户[\%1]上线了"{}}).arg(username);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00201}00201         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00202}00202         item-\/>slot\_setInfo(info-\/>uuid, username, info-\/>state, info-\/>iconid, feeling);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00203}00203     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00204}00204 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00205}00205 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00206}\mbox{\hyperlink{classKernel_a469be53950174972d58ae6f196d27473}{00206}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a469be53950174972d58ae6f196d27473}{Kernel::slot\_ChatRq}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00207}00207 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00208}00208     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00209}00209     STRU\_CHAT\_RQ* rq = (STRU\_CHAT\_RQ*)buf; \textcolor{comment}{// 对方好友发来的聊天数据包(userid是好友的id)}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00210}00210     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.count(rq-\/>userid) > 0) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00211}00211         \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[rq-\/>userid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00212}00212         chat-\/>slot\_setChatMsg(QString::fromStdString(rq-\/>content));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00213}00213         chat-\/>show(); \textcolor{comment}{// 弹出聊天框}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00214}00214     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00215}00215 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00216}00216 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00217}\mbox{\hyperlink{classKernel_a2e80c738deb690b807163f9d6a31ee30}{00217}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a2e80c738deb690b807163f9d6a31ee30}{Kernel::slot\_ChatRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00218}00218 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00219}00219     STRU\_CHAT\_RS* rs = (STRU\_CHAT\_RS*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00220}00220     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.count(rs-\/>friendid) > 0) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00221}00221         \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[rs-\/>friendid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00222}00222         chat-\/>slot\_setUserOffline();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00223}00223     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00224}00224 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00225}00225 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00226}\mbox{\hyperlink{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}{00226}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}{Kernel::slot\_addFriendRq}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00227}00227 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00228}00228     STRU\_ADD\_FRIEND\_RQ* rq = (STRU\_ADD\_FRIEND\_RQ*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00229}00229     STRU\_ADD\_FRIEND\_RS rs; \textcolor{comment}{// 别人申请添加好友, 构建回复包}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00230}00230     \textcolor{keywordflow}{if} (QMessageBox::question(m\_mainWnd, \textcolor{stringliteral}{"{}添加好友"{}}, QString(\textcolor{stringliteral}{"{}用户[\%1]请求添加好友"{}}).arg(rq-\/>userName)) == QMessageBox::Yes) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00231}00231         rs.result = add\_success;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00232}00232     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00233}00233         rs.result = user\_refuse;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00234}00234     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00235}00235     strcpy\_s(rs.friendName, rq-\/>friendName);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00236}00236     rs.friendid = m\_uuid; \textcolor{comment}{// 回复包中的friendId是自己}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00237}00237     rs.userid = rq-\/>userid; \textcolor{comment}{// 回复包中的userid是朋友}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00238}00238     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rs, \textcolor{keyword}{sizeof}(rs));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00239}00239 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00240}00240 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00241}\mbox{\hyperlink{classKernel_a7b391301f52d2d008f513e5cb4020f3c}{00241}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a7b391301f52d2d008f513e5cb4020f3c}{Kernel::slot\_addFriendRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00242}00242 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00243}00243     STRU\_ADD\_FRIEND\_RS* rs = (STRU\_ADD\_FRIEND\_RS*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00244}00244     QString friendName = \mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{GB2312ToUtf8}}(rs-\/>friendName);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00245}00245     \textcolor{keywordflow}{switch}(rs-\/>result) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00246}00246     \textcolor{keywordflow}{case} no\_this\_user:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00247}00247         QMessageBox::about(  m\_mainWnd , \textcolor{stringliteral}{"{}提示"{}} ,QString(\textcolor{stringliteral}{"{}用户[\%1]不存在,添加好友失败"{}}).arg(friendName) );}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00248}00248         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00249}00249     \textcolor{keywordflow}{case} user\_offline:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00250}00250         QMessageBox::about(  m\_mainWnd , \textcolor{stringliteral}{"{}提示"{}} ,QString(\textcolor{stringliteral}{"{}用户[\%1]离线,添加好友失败"{}}).arg(friendName) );}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00251}00251         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00252}00252     \textcolor{keywordflow}{case} add\_success:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00253}00253         QMessageBox::about(  m\_mainWnd , \textcolor{stringliteral}{"{}提示"{}} ,QString(\textcolor{stringliteral}{"{}用户[\%1]接受,添加好友成功"{}}).arg(friendName) );}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00254}00254         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00255}00255     \textcolor{keywordflow}{case} user\_refuse:}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00256}00256         QMessageBox::about(  m\_mainWnd , \textcolor{stringliteral}{"{}提示"{}} ,QString(\textcolor{stringliteral}{"{}用户[\%1]拒绝,添加好友失败"{}}).arg(friendName) );}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00257}00257         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00258}00258     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00259}00259 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00260}00260 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00261}00261 \textcolor{keywordtype}{void} Kernel::slot\_DealFileInfoRq(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00262}00262 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00263}00263     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00264}00264     STRU\_FILE\_INFO\_RQ* rq = (STRU\_FILE\_INFO\_RQ*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00265}00265     STRU\_FILE\_INFO\_RS rs;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00266}00266     strcpy\_s(rs.szFileId, rq-\/>szFileId); \textcolor{comment}{// 文件id的文件名字段应该是现在保存的文件名}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00267}00267     rs.uuid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00268}00268     rs.friendid = rq-\/>uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00269}00269     \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00270}00270     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.find(rq-\/>uuid) != \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00271}00271         chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[rq-\/>uuid]; \textcolor{comment}{// 收到的发送文件请求包, uuid为好友id}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00272}00272         chat-\/>show();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00273}00273         qDebug() << \_\_func\_\_ << \textcolor{stringliteral}{"{}显示与好友的对话框"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00274}00274         \textcolor{comment}{// 显示"{} 谁， 发送了文件名为某某的文件, 是否同意}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00275}00275         \textcolor{comment}{// QString text = QString::fromStdString(rq-\/>szFileName);}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00276}00276         \textcolor{keywordtype}{char} text[1024] = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00277}00277         sprintf(text, \textcolor{stringliteral}{"{}是否接受\%s"{}}, rq-\/>szFileName);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00278}00278         QMessageBox::StandardButton button = QMessageBox::question(chat, \textcolor{stringliteral}{"{}好友发来文件"{}}, QString::fromStdString(text), QMessageBox::StandardButtons(QMessageBox::Save|QMessageBox::Cancel), QMessageBox::NoButton);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00279}00279         \textcolor{keywordflow}{if} (button == QMessageBox::Save) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00280}00280             \textcolor{comment}{// 用户同意保存文件}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00281}00281             \textcolor{comment}{// 返回值是选中的文件的路径, 如果用户按下取消, 返回一个空的url}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00282}00282             QString fileName = QFileDialog::getSaveFileName(chat, \textcolor{stringliteral}{"{}选择保存文件路径"{}}, \textcolor{stringliteral}{"{}."{}}, tr(\textcolor{stringliteral}{"{}文本文件(*.txt);;所有文件 (*.*)"{}}));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00283}00283             qDebug() << \textcolor{stringliteral}{"{}getSaveFileName() 选中的文件名:  "{}} << fileName;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00284}00284             \textcolor{comment}{// 将文件信息存储到map中}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00285}00285             FileInfo* info = \textcolor{keyword}{new} FileInfo;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00286}00286             info-\/>nFileSize = rq-\/>nFileSize;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00287}00287             info-\/>nPos = 0;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00288}00288             strcpy\_s(info-\/>szFileId, rq-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00289}00289             strcpy\_s(info-\/>szFileName, rq-\/>szFileName);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00290}00290             strcpy\_s(info-\/>szFilePath, fileName.toStdString().c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00291}00291             \textcolor{keywordflow}{if} (fopen\_s(\&info-\/>pFile, info-\/>szFilePath, \textcolor{stringliteral}{"{}wb"{}}) != 0) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00292}00292                 qDebug() << \textcolor{stringliteral}{"{}打开文件失败 fopen\_s(\&info-\/>pFile, info-\/>szFilePath, 'wb')"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00293}00293                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00294}00294             \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00295}00295             \textcolor{keywordflow}{if} (!info-\/>pFile) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00296}00296                 qDebug() << \textcolor{stringliteral}{"{}pFile是空指针"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00297}00297                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00298}00298             \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00299}00299             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.find(info-\/>szFileId) == \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00300}00300                 qDebug() << \textcolor{stringliteral}{"{}接收端同意接受文件, 保存文件信息, info-\/>szFileId "{}} << info-\/>szFileId << \textcolor{stringliteral}{"{} info-\/>szFileName: "{}} << info-\/>szFileName << \textcolor{stringliteral}{"{} info-\/>szFilePath:"{}} << info-\/>szFilePath;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00301}00301                 \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}[info-\/>szFileId] = info;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00302}00302             \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00303}00303             rs.nResult = \_file\_accept;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00304}00304         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (button == QMessageBox::Cancel) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00305}00305             \textcolor{comment}{// 用户拒绝保存文件}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00306}00306             rs.nResult = \_file\_refuse;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00307}00307 \textcolor{comment}{//            // 将文件信息删掉}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00308}00308 \textcolor{comment}{//            if(m\_mapFileIdToFileInfo.find(rq-\/>szFileId) != m\_mapFileIdToFileInfo.end()) \{}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00309}00309 \textcolor{comment}{//                FileInfo* info = m\_mapFileIdToFileInfo[rq-\/>szFileId];}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00310}00310 \textcolor{comment}{//                fclose(info-\/>pFile);}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00311}00311 \textcolor{comment}{//                m\_mapFileIdToFileInfo.erase(rq-\/>szFileId);}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00312}00312 \textcolor{comment}{//                delete info;}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00313}00313 \textcolor{comment}{//                info = nullptr;}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00314}00314 \textcolor{comment}{//            \}}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00315}00315         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00316}00316         m\_pClient-\/>SendData(lSendIP, (\textcolor{keywordtype}{char}*)\&rs, \textcolor{keyword}{sizeof}(rs));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00317}00317         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00318}00318     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00319}00319     qDebug() << \_\_func\_\_ << \textcolor{stringliteral}{"{}没有进入到if"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00320}00320 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00321}00321 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00322}00322 \textcolor{keywordtype}{void} Kernel::slot\_DealFileInfoRs(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00323}00323 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00324}00324     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00325}00325     STRU\_FILE\_INFO\_RS* rs = (STRU\_FILE\_INFO\_RS*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00326}00326     \textcolor{keywordflow}{if} (rs-\/>nResult == \_file\_accept) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00327}00327         \textcolor{comment}{// 构建STRU\_FILE\_BLOCK\_RQ请求包}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00328}00328         STRU\_FILE\_BLOCK\_RQ rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00329}00329         uint64\_t nPos = 0;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00330}00330         \textcolor{keywordtype}{int} nReadLen = 0;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00331}00331         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.find(rs-\/>szFileId) != \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00332}00332             qDebug() << \textcolor{stringliteral}{"{}好友同意接受, 接受的文件id为"{}} << rs-\/>szFileId;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00333}00333             FileInfo* info = \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}[rs-\/>szFileId];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00334}00334             \textcolor{keywordflow}{while}(\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00335}00335                 nReadLen = fread(rq.szFileContent, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}), \_DEF\_FILE\_CONTENT\_SIZE, info-\/>pFile);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00336}00336                 qDebug() << \textcolor{stringliteral}{"{}发送文件 fread() nReadLen:"{}} << nReadLen;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00337}00337                 rq.nBlockSize = nReadLen;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00338}00338                 strcpy\_s(rq.szFileId, rs-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00339}00339                 rq.friendid = rs-\/>uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00340}00340                 rq.uuid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00341}00341                 m\_pClient-\/>SendData(lSendIP, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00342}00342                 nPos += nReadLen;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00343}00343                 \textcolor{keywordflow}{if} (nPos >= info-\/>nFileSize || nReadLen < \_DEF\_FILE\_CONTENT\_SIZE) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00344}00344                     fclose(info-\/>pFile);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00345}00345                     \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.erase(rs-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00346}00346                     \textcolor{keyword}{delete} info;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00347}00347                     info = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00348}00348                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00349}00349                 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00350}00350             \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00351}00351         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00352}00352     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00353}00353         \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00354}00354         \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.find(rs-\/>uuid) != \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00355}00355             chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[rs-\/>uuid]; \textcolor{comment}{// 收到的发送文件回复包, uuid为好友id}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00356}00356             chat-\/>show();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00357}00357             QMessageBox::about(chat, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}对方拒绝接受"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00358}00358             \textcolor{comment}{// 将文件信息删掉}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00359}00359             \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.find(rs-\/>szFileId) != \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00360}00360                 FileInfo* info = \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}[rs-\/>szFileId];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00361}00361                 fclose(info-\/>pFile);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00362}00362                 \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.erase(rs-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00363}00363                 \textcolor{keyword}{delete} info;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00364}00364                 info = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00365}00365             \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00366}00366         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00367}00367     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00368}00368 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00369}00369 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00370}00370 \textcolor{keywordtype}{void} Kernel::slot\_DealFileBlockRq(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00371}00371 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00372}00372     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00373}00373     STRU\_FILE\_BLOCK\_RQ* rq = (STRU\_FILE\_BLOCK\_RQ*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00374}00374     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.find(rq-\/>szFileId) == \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00375}00375         qDebug() << \textcolor{stringliteral}{"{}接收到文件块请求，但没有保存文件信息无法接受"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00376}00376         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00377}00377     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00378}00378     FileInfo* info = \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}[rq-\/>szFileId];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00379}00379     qDebug() << \_\_func\_\_ << \textcolor{stringliteral}{"{}接受到的文件内容是"{}} << rq-\/>szFileContent;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00380}00380     qDebug() << \textcolor{stringliteral}{"{}上次同意接受文件保存的文件信息 info-\/>szFileId "{}} << info-\/>szFileId << \textcolor{stringliteral}{"{} info-\/>szFileName: "{}} << info-\/>szFileName << \textcolor{stringliteral}{"{} info-\/>szFilePath:"{}} << info-\/>szFilePath;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00381}00381     \textcolor{keywordtype}{int} nResult = fwrite(rq-\/>szFileContent, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}), rq-\/>nBlockSize, info-\/>pFile);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00382}00382     info-\/>nPos += nResult;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00383}00383     qDebug() << \textcolor{stringliteral}{"{}文件现在已经接受的大小为: "{}} << info-\/>nPos;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00384}00384     \textcolor{keywordflow}{if} (info-\/>nPos >= info-\/>nFileSize) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00385}00385         \textcolor{comment}{// 已经传输完毕}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00386}00386         qDebug() << \textcolor{stringliteral}{"{}文件"{}} << info-\/>szFileName << \textcolor{stringliteral}{"{}传输完毕"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00387}00387         \textcolor{comment}{// 关闭文件指针}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00388}00388         fclose(info-\/>pFile);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00389}00389         \textcolor{comment}{// 从map中删掉文件信息}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00390}00390         \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.erase(rq-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00391}00391         \textcolor{keyword}{delete} info;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00392}00392         info = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00393}00393         \textcolor{comment}{// 发送接受成功回复包}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00394}00394         STRU\_FILE\_BLOCK\_RS rs;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00395}00395         strcpy\_s(rs.szFileId, rq-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00396}00396         rs.nResult = \_file\_block\_recv\_success;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00397}00397         rs.uuid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00398}00398         rs.friendid = rq-\/>uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00399}00399         m\_pClient-\/>SendData(lSendIP, (\textcolor{keywordtype}{char}*)\&rs, \textcolor{keyword}{sizeof}(rs));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00400}00400         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.find(rq-\/>uuid) != \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00401}00401             \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[rq-\/>uuid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00402}00402             chat-\/>show();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00403}00403             QMessageBox::about(chat, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}已经成功接受该文件"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00404}00404         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00405}00405     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00406}00406 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00407}00407 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00408}00408 \textcolor{keywordtype}{void} Kernel::slot\_DealFileBlockRs(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00409}00409 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00410}00410     STRU\_FILE\_BLOCK\_RS *rs = (STRU\_FILE\_BLOCK\_RS*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00411}00411     \textcolor{keywordflow}{if} (rs-\/>nResult == \_file\_block\_recv\_success) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00412}00412         \textcolor{comment}{// 对端已经成功接受}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00413}00413         \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.find(rs-\/>uuid) != \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00414}00414             \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[rs-\/>uuid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00415}00415             chat-\/>show();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00416}00416             \textcolor{keywordflow}{if}(\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.find(rs-\/>szFileId) != \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00417}00417                 qDebug() << \textcolor{stringliteral}{"{}!!!!!!!!!!!!!!!!!!!!!!!!!!!这行不应该出现!!!!!!!!!!!!!!"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00418}00418                 FileInfo* info = \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}[rs-\/>szFileId];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00419}00419                 fclose(info-\/>pFile);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00420}00420                 \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.erase(rs-\/>szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00421}00421                 \textcolor{keyword}{delete} info;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00422}00422                 info = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00423}00423             \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00424}00424             QMessageBox::about(chat, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}对方已经成功接受"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00425}00425         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00426}00426     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00427}00427 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00428}00428 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00429}\mbox{\hyperlink{classKernel_a646a42de48aea4a2bd267e0f771efa5e}{00429}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a646a42de48aea4a2bd267e0f771efa5e}{Kernel::slot\_LoginCommit}}(QString username, QString password) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00430}00430     \textcolor{comment}{// std::string strUserName = username.toStdString();}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00431}00431     std::string strPassWord = password.toStdString();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00432}00432     STRU\_LOGIN\_RQ rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00433}00433     \textcolor{comment}{// strcpy\_s(rq.username, strUserName.c\_str());}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00434}00434     \mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{Utf8ToGB2312}}(username, rq.username, \textcolor{keyword}{sizeof}(rq.username));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00435}00435     strcpy\_s(rq.password, strPassWord.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00436}00436     qDebug() << \textcolor{stringliteral}{"{}发送登录信息给服务器"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00437}00437 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00438}00438     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00439}00439 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00440}00440 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00441}\mbox{\hyperlink{classKernel_aec00bbd36ea67f285fc2e516fef520b9}{00441}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_aec00bbd36ea67f285fc2e516fef520b9}{Kernel::slot\_RegisterCommit}}(QString username, QString tel, QString password) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00442}00442     \textcolor{comment}{// std::string strUserName = username.toStdString();}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00443}00443     std::string strTel = tel.toStdString();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00444}00444     std::string strPassWord = password.toStdString();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00445}00445     STRU\_REGISTER\_RQ rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00446}00446     \textcolor{comment}{// strcpy\_s(rq.username, strUserName.c\_str());}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00447}00447     \mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{Utf8ToGB2312}}(username, rq.username, \textcolor{keyword}{sizeof}(rq.username));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00448}00448     strcpy\_s(rq.tel, strTel.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00449}00449     strcpy\_s(rq.password, strPassWord.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00450}00450     qDebug() << \textcolor{stringliteral}{"{}发送注册信息给服务器"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00451}00451 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00452}00452     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00453}00453 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00454}00454 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00455}\mbox{\hyperlink{classKernel_a773bea13586e584bb49be5d05b4ea5dc}{00455}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a773bea13586e584bb49be5d05b4ea5dc}{Kernel::slot\_userItemClicked}}(\textcolor{keywordtype}{int} uuid)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00456}00456 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00457}00457     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00458}00458     \textcolor{comment}{// 弹出聊天窗口}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00459}00459     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.find(uuid) != \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00460}00460         \mbox{\hyperlink{classChatDialog}{ChatDialog}}* chat = \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}}[uuid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00461}00461         chat-\/>show();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00462}00462     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00463}00463 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00464}00464 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00465}\mbox{\hyperlink{classKernel_ae8053324f7683214e8b197ce56179e53}{00465}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_ae8053324f7683214e8b197ce56179e53}{Kernel::slot\_SendChatMsg}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, QString content)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00466}00466 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00467}00467     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00468}00468     STRU\_CHAT\_RQ rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00469}00469     rq.userid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00470}00470     rq.friendid = id;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00471}00471     std::string strContent = content.toStdString();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00472}00472     strcpy\_s(rq.content,strContent.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00473}00473     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00474}00474 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00475}00475 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00476}\mbox{\hyperlink{classKernel_a5e02453ee98926ad2d0937ccf422f470}{00476}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a5e02453ee98926ad2d0937ccf422f470}{Kernel::slot\_addFriendClicked}}()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00477}00477 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00478}00478     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00479}00479     QString strName = QInputDialog::getText(m\_mainWnd, \textcolor{stringliteral}{"{}添加好友"{}}, \textcolor{stringliteral}{"{}输入好友名字"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00480}00480     \textcolor{keywordflow}{if} (strName.length() <= 0) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00481}00481         QMessageBox::about(m\_mainWnd, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}请输入用户名"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00482}00482         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00483}00483     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strName.length() > 20) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00484}00484         QMessageBox::about(m\_mainWnd, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}输入的用户名不合法"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00485}00485         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00486}00486     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00487}00487     \textcolor{keywordflow}{if} (strName == m\_username) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00488}00488         QMessageBox::about(m\_mainWnd, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}不可以添加自己为好友"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00489}00489         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00490}00490     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00491}00491     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it : m\_mapIdToUserItem) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00492}00492         \textcolor{keywordflow}{if} (it.second-\/>m\_name == strName) \{ \textcolor{comment}{// 已经是好友}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00493}00493             QMessageBox::about(m\_mainWnd, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}对方已经是你的好友"{}});}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00494}00494             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00495}00495         \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00496}00496     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00497}00497     STRU\_ADD\_FRIEND\_RQ rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00498}00498     rq.userid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00499}00499     std::string userName = m\_username.toStdString();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00500}00500     strcpy\_s(rq.userName, userName.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00501}00501     \mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{Utf8ToGB2312}}(strName, rq.friendName, \textcolor{keyword}{sizeof}(rq.friendName));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00502}00502     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00503}00503 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00504}00504 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00505}\mbox{\hyperlink{classKernel_afa81914f904d8da74bda000828cc36fa}{00505}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_afa81914f904d8da74bda000828cc36fa}{Kernel::slot\_SendFile}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, QString filename, uint64\_t filesize)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00506}00506 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00507}00507     qDebug() << \_\_func\_\_ << \textcolor{stringliteral}{"{} id: "{}} << \textcolor{keywordtype}{id} << \textcolor{stringliteral}{"{} filename:"{}} << filename << \textcolor{stringliteral}{"{} filesize:"{}} << filesize;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00508}00508     STRU\_FILE\_INFO\_RQ rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00509}00509     std::string strfilename = \mbox{\hyperlink{classKernel_adff83ffd06f1c450798e393d2cc4101b}{GetFileName}}(filename.toStdString().c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00510}00510     strcpy\_s(rq.szFileName, strfilename.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00511}00511     std::string strtime = QTime::currentTime().toString(\textcolor{stringliteral}{"{}hh\_mm\_ss\_zzz"{}}).toStdString();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00512}00512     sprintf(rq.szFileId, \textcolor{stringliteral}{"{}\%s\_\%s"{}}, strfilename.c\_str(), strtime.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00513}00513     rq.uuid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00514}00514     rq.friendid = id;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00515}00515     rq.nFileSize = filesize;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00516}00516     \textcolor{comment}{// 将文件信息存储到FileInfo结构体中}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00517}00517     FileInfo *info = \textcolor{keyword}{new} FileInfo;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00518}00518     info-\/>nPos = 0;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00519}00519     info-\/>nFileSize = filesize;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00520}00520     strcpy\_s(info-\/>szFileId, rq.szFileId);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00521}00521     strcpy\_s(info-\/>szFileName, strfilename.c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00522}00522     strcpy\_s(info-\/>szFilePath, filename.toStdString().c\_str());}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00523}00523     \textcolor{keywordflow}{if} (fopen\_s(\&info-\/>pFile, info-\/>szFilePath, \textcolor{stringliteral}{"{}rb"{}}) != 0) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00524}00524         qDebug() << \textcolor{stringliteral}{"{}主动发送文件端打开文件失败 errno="{}} << errno << \textcolor{stringliteral}{"{} reason = "{}} << strerror(errno);}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00525}00525         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00526}00526     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00527}00527     \textcolor{keywordflow}{if} (!info-\/>pFile) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00528}00528         qDebug() << \textcolor{stringliteral}{"{}主动发送文件端info-\/>pFile为空"{}};}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00529}00529     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00530}00530     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.find(info-\/>szFileId) == \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00531}00531         \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}}[info-\/>szFileId] = info;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00532}00532     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00533}00533     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00534}00534     \textcolor{comment}{// 向服务器发送文件信息请求包, 服务器在收到这个数据包之后应该查看对方是否在线，如果对方不在线返回rs回复}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00535}00535     \textcolor{comment}{// 否则， 服务器将直接转发}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00536}00536 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00537}00537 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00538}\mbox{\hyperlink{classKernel_a77bce2e146702fc88f5fe593c1df2ada}{00538}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a77bce2e146702fc88f5fe593c1df2ada}{Kernel::slot\_DealOffineRq}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00539}00539 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00540}00540     STRU\_OFFLINE* rq = (STRU\_OFFLINE*)buf;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00541}00541     \textcolor{keywordtype}{int} friendid = rq-\/>uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00542}00542     \textcolor{keywordflow}{if} (m\_mapIdToUserItem.find(friendid) != m\_mapIdToUserItem.end()) \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00543}00543         \mbox{\hyperlink{classUserItem}{UserItem}}* item = m\_mapIdToUserItem[friendid];}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00544}00544         item-\/>slot\_setOffline();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00545}00545     \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00546}00546 \}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00547}00547 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00548}\mbox{\hyperlink{classKernel_a802c41d00fdf0596413ab5e9b3419129}{00548}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a802c41d00fdf0596413ab5e9b3419129}{Kernel::slot\_SendOffline}}()}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00549}00549 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00550}00550     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00551}00551     STRU\_OFFLINE rq;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00552}00552     rq.uuid = m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00553}00553     m\_pClient-\/>SendData(0, (\textcolor{keywordtype}{char}*)\&rq, \textcolor{keyword}{sizeof}(rq));}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00554}00554 }
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00555}00555     \textcolor{comment}{// TODO处理开辟出来的内存空间}}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00556}00556     \mbox{\hyperlink{classKernel_a44efeb221696f2645825839573ac3431}{DestroyInstance}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8cpp_source_l00557}00557 \}}
+
+\end{DoxyCode}

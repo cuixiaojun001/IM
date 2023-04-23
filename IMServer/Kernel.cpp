@@ -18,7 +18,7 @@ Kernel::~Kernel()
 bool Kernel::startServer()
 {
 	if (!m_sql.ConnectMySql("127.0.0.1", "root", "becauseofyou0926", "im_database")) {
-		std::cout << "Êı¾İ¿â´ò¿ªÊ§°Ü" << std::endl;
+		std::cout << "æ•°æ®åº“æ‰“å¼€å¤±è´¥" << std::endl;
 		return false;
 	}
 	if (!m_pServer->OpenNet()) return false;
@@ -69,12 +69,12 @@ void Kernel::dealLoginRq(unsigned long lSendIP, const char* buf, int nLen)
 		else {
 			rs.result = login_success;
 			rs.userid = uuid;
-			// µÇÂ¼³É¹¦
+			// ç™»å½•æˆåŠŸ
 			m_pServer->SendData(lSendIP, (char*)&rs, sizeof(rs));
-			// ½«uuidºÍ¶ÔÓ¦µÄ·şÎñÌ×½Ó×Ö¶ÔÓ¦
+			// å°†uuidå’Œå¯¹åº”çš„æœåŠ¡å¥—æ¥å­—å¯¹åº”
 			m_mapIdToSock[uuid] = lSendIP;
 
-			// »ñÈ¡ºÃÓÑÁĞ±í
+			// è·å–å¥½å‹åˆ—è¡¨
 			getFriendList(lSendIP, (char*)&uuid, sizeof(rs.userid));
 			return;
 		}
@@ -85,7 +85,7 @@ void Kernel::dealLoginRq(unsigned long lSendIP, const char* buf, int nLen)
 void Kernel::dealRegisterRq(unsigned long lSendIP, const char* buf, int nLen)
 {
 	STRU_REGISTER_RQ* rq = (STRU_REGISTER_RQ*)buf;
-	// ÏÈÅĞ¶Ï¸ÃusernameÊÇ·ñÒÑ¾­´æÔÚ
+	// å…ˆåˆ¤æ–­è¯¥usernameæ˜¯å¦å·²ç»å­˜åœ¨
 	std::list<std::string> lstRes;
 	char sqlbuf[1024] = "";
 	sprintf_s(sqlbuf, "select username from t_user where username = '%s'", rq->username);
@@ -114,14 +114,14 @@ void Kernel::getFriendList(unsigned long lSendIP, const char* buf, int nLen)
 {
 	int* uuid = (int*)buf;
 	STRU_FRIEND_INFO info;
-	getFriendInfoFromSql(*uuid, &info); // »ñÈ¡×Ô¼ºµÄĞÅÏ¢
+	getFriendInfoFromSql(*uuid, &info); // è·å–è‡ªå·±çš„ä¿¡æ¯
 	/*std::cout << "getFriendList() *uuid :" << info.uuid << std::endl;
 	std::cout << "getFriendList() info.type: " << info.type << std::endl;
 	std::cout << "getFriendList() info.username: " << info.username << std::endl;
 	std::cout << "getFriendList() info.feeling: " << info.feeling << std::endl;*/
 	m_pServer->SendData(lSendIP, (char*)&info, sizeof(info));
 
-	// »ñÈ¡ºÃÓÑĞÅÏ¢ÁĞ±í
+	// è·å–å¥½å‹ä¿¡æ¯åˆ—è¡¨
 	std::list<std::string> lstRes;
 	char sqlbuf[1024] = "";
 	sprintf_s(sqlbuf, "select friend_id from t_friendship where uuid = '%d';", *uuid);
@@ -135,7 +135,7 @@ void Kernel::getFriendList(unsigned long lSendIP, const char* buf, int nLen)
 		getFriendInfoFromSql(friend_id, &friendinfo);
 		// std::cout << "getFriendList() friend_id: " << friendinfo.uuid << std::endl;
 		m_pServer->SendData(lSendIP, (char*)&friendinfo, sizeof(friendinfo));
-		// Èç¹ûºÃÓÑÔÚÏß, ½«×Ô¼ºÉÏÏßµÄĞÅÏ¢·¢ËÍ¸øºÃÓÑ
+		// å¦‚æœå¥½å‹åœ¨çº¿, å°†è‡ªå·±ä¸Šçº¿çš„ä¿¡æ¯å‘é€ç»™å¥½å‹
 		if (m_mapIdToSock.find(friendinfo.uuid) != m_mapIdToSock.end()) {
 			SOCKET sockFriend = m_mapIdToSock[friendinfo.uuid];
 			m_pServer->SendData(sockFriend, (char*)&info, sizeof(info));
@@ -147,7 +147,7 @@ void Kernel::dealChatRq(unsigned long lSendIP, const char* buf, int nLen)
 {
 	std::cout << __func__ << std::endl;
 	STRU_CHAT_RQ* rq = (STRU_CHAT_RQ*)buf;
-	if (m_mapIdToSock.find(rq->friendid) == m_mapIdToSock.end()) { // ºÃÓÑÀëÏß
+	if (m_mapIdToSock.find(rq->friendid) == m_mapIdToSock.end()) { // å¥½å‹ç¦»çº¿
 		STRU_CHAT_RS rs;
 		rs.userid = rq->userid;
 		rs.friendid = rq->friendid;
@@ -156,7 +156,7 @@ void Kernel::dealChatRq(unsigned long lSendIP, const char* buf, int nLen)
 		m_pServer->SendData(lSendIP, (char*)&rs, sizeof(rs));
 		return;
 	}
-	// ºÃÓÑÔÚÏß
+	// å¥½å‹åœ¨çº¿
 	SOCKET sockFirend = m_mapIdToSock[rq->friendid];
 	m_pServer->SendData(sockFirend, buf, nLen);
 }
@@ -164,7 +164,7 @@ void Kernel::dealChatRq(unsigned long lSendIP, const char* buf, int nLen)
 void Kernel::dealAddFriendRq(unsigned long lSendIP, const char* buf, int nLen)
 {
 	STRU_ADD_FRIEND_RQ* rq = (STRU_ADD_FRIEND_RQ*)buf;
-	// ²éÑ¯Êı¾İ¿â¿´friendNameÊÇ·ñ´æÔÚ
+	// æŸ¥è¯¢æ•°æ®åº“çœ‹friendNameæ˜¯å¦å­˜åœ¨
 	std::list<std::string> lstRes;
 	char sqlbuf[1024] = "";
 	sprintf_s(sqlbuf, "select uuid from t_user where username = '%s';", rq->friendName);
@@ -174,15 +174,15 @@ void Kernel::dealAddFriendRq(unsigned long lSendIP, const char* buf, int nLen)
 	if (lstRes.size() > 0) {
 		int friendId = atoi(lstRes.front().c_str());
 		lstRes.pop_front();
-		// ²é¿´¸ÃºÃÓÑÊÇ·ñÔÚÏß
+		// æŸ¥çœ‹è¯¥å¥½å‹æ˜¯å¦åœ¨çº¿
 		if (m_mapIdToSock.find(friendId) != m_mapIdToSock.end()) {
-			// ÔÚÏß
-			// Ïòfriend·¢ËÍºÃÓÑÉêÇëÌí¼ÓÇëÇó
+			// åœ¨çº¿
+			// å‘friendå‘é€å¥½å‹ç”³è¯·æ·»åŠ è¯·æ±‚
 			SOCKET sockFriend = m_mapIdToSock[friendId];
-			m_pServer->SendData(sockFriend, buf, nLen); // Ö±½Ó×ª·¢
+			m_pServer->SendData(sockFriend, buf, nLen); // ç›´æ¥è½¬å‘
 		}
 		else {
-			// ¸ÃÓÃ»§²»ÔÚÏß
+			// è¯¥ç”¨æˆ·ä¸åœ¨çº¿
 			STRU_ADD_FRIEND_RS rs;
 			rs.result = user_offline;
 			rs.friendid = friendId;
@@ -192,7 +192,7 @@ void Kernel::dealAddFriendRq(unsigned long lSendIP, const char* buf, int nLen)
 		}
 	}
 	else {
-		// ²»´æÔÚÕâ¸öÈË
+		// ä¸å­˜åœ¨è¿™ä¸ªäºº
 		STRU_ADD_FRIEND_RS rs;
 		rs.result = no_this_user;
 		rs.friendid = 0;
@@ -206,7 +206,7 @@ void Kernel::dealAddFriendRs(unsigned long lSendIP, const char* buf, int nLen)
 {
 	STRU_ADD_FRIEND_RS* rs = (STRU_ADD_FRIEND_RS*)buf;
 	STRU_ADD_FRIEND_RS rq;
-	if (rs->result == add_success) { // ÔÚºÃÓÑ¹ØÏµ±íÖĞ¼ÓÈë¸Ã¹ØÏµ
+	if (rs->result == add_success) { // åœ¨å¥½å‹å…³ç³»è¡¨ä¸­åŠ å…¥è¯¥å…³ç³»
 		char sqlbuf[1024] = "";
 		sprintf_s(sqlbuf, "insert into t_friendship values(%d, %d);", rs->friendid, rs->userid);
 		if (!m_sql.UpdateMySql(sqlbuf)) {
@@ -255,7 +255,7 @@ void Kernel::DealFileInfoRq(unsigned long lSendIP, const char* buf, int nLen)
 	std::cout << __func__ << std::endl;
 	STRU_FILE_INFO_RQ* rq = (STRU_FILE_INFO_RQ*)buf;
 	if (m_mapIdToSock.find(rq->friendid) == m_mapIdToSock.end()) {
-		// ºÃÓÑ²»ÔÚÏß
+		// å¥½å‹ä¸åœ¨çº¿
 		STRU_FILE_INFO_RS rs;
 		rs.friendid = rq->uuid;
 		rs.uuid = rq->friendid;
@@ -265,8 +265,8 @@ void Kernel::DealFileInfoRq(unsigned long lSendIP, const char* buf, int nLen)
 		return;
 	}
 	else {
-		// ºÃÓÑÔÚÏß
-		std::cout << rq->friendid << "ºÃÓÑ ÔÚÏß, ×ª·¢°ü" << std::endl;
+		// å¥½å‹åœ¨çº¿
+		std::cout << rq->friendid << "å¥½å‹ åœ¨çº¿, è½¬å‘åŒ…" << std::endl;
 		SOCKET sockFriend = m_mapIdToSock[rq->friendid];
 		m_pServer->SendData(sockFriend, buf, nLen);
 	}
@@ -276,12 +276,12 @@ void Kernel::DealFileInfoRq(unsigned long lSendIP, const char* buf, int nLen)
 	//char filePath[_MAX_FILE_PATH_SIZE]{};
 	//OPENFILENAME file{};
 	//file.lStructSize = sizeof(file);
-	//file.lpstrFilter = "ËùÓĞÎÄ¼ş(*.*)\0*.*\0";
+	//file.lpstrFilter = "æ‰€æœ‰æ–‡ä»¶(*.*)\0*.*\0";
 	//file.lpstrFile = filePath;
 	//file.nMaxFile = sizeof(filePath) / sizeof(*filePath);
 	//file.Flags = OFN_EXPLORER;
 	//// strcpy_s(file.lpstrFile, 1024, rq->szFileName);
-	//BOOL flag = GetSaveFileNameA(&file); // Ä¬ÈÏ½ÓÊÜ
+	//BOOL flag = GetSaveFileNameA(&file); // é»˜è®¤æ¥å—
 	//if (flag == FALSE) {
 	//	strcpy_s(file.lpstrFile, 1024, rq->szFileName);
 	//}
@@ -305,12 +305,12 @@ void Kernel::DealFileInfoRs(unsigned long lSendIP, const char* buf, int nLen)
 	std::cout << __func__ << std::endl;
 	STRU_FILE_INFO_RS* rs = (STRU_FILE_INFO_RS*)buf;
 	if (m_mapIdToSock.find(rs->friendid) == m_mapIdToSock.end()) {
-		// ºÃÓÑ²»ÔÚÏß
+		// å¥½å‹ä¸åœ¨çº¿
 		return;
 	}
 	else {
-		// ºÃÓÑÔÚÏß
-		std::cout << "ºÃÓÑÔÚÏß, Ö±½Ó×ª·¢ÎÄ¼şĞÅÏ¢»Ø¸´°ü" << std::endl;
+		// å¥½å‹åœ¨çº¿
+		std::cout << "å¥½å‹åœ¨çº¿, ç›´æ¥è½¬å‘æ–‡ä»¶ä¿¡æ¯å›å¤åŒ…" << std::endl;
 		SOCKET sockFriend = m_mapIdToSock[rs->friendid];
 		m_pServer->SendData(sockFriend, buf, nLen);
 	}
@@ -321,11 +321,11 @@ void Kernel::DealFileBlockRq(unsigned long lSendIP, const char* buf, int nLen)
 	std::cout << __func__ << std::endl;
 	STRU_FILE_BLOCK_RQ* rq = (STRU_FILE_BLOCK_RQ*)buf;
 	if (m_mapIdToSock.find(rq->friendid) == m_mapIdToSock.end()) {
-		// ºÃÓÑ²»ÔÚÏß
+		// å¥½å‹ä¸åœ¨çº¿
 		return;
 	}
 	else {
-		// ºÃÓÑÔÚÏß
+		// å¥½å‹åœ¨çº¿
 		SOCKET sockFriend = m_mapIdToSock[rq->friendid];
 		m_pServer->SendData(sockFriend, buf, nLen);
 	}
@@ -340,8 +340,8 @@ void Kernel::DealFileBlockRq(unsigned long lSendIP, const char* buf, int nLen)
 	//info->nPos += nResult;
 	//std::cout << "info->nPos: " << info->nPos << std::endl;
 	//if (info->nPos >= info->nFileSize) {
-	//	// ÒÑ¾­´«ÊäÍê±Ï
-	//	std::cout << "ÎÄ¼ş" << info->szFileName << "´«ÊäÍê±Ï" << std::endl;
+	//	// å·²ç»ä¼ è¾“å®Œæ¯•
+	//	std::cout << "æ–‡ä»¶" << info->szFileName << "ä¼ è¾“å®Œæ¯•" << std::endl;
 	//	fclose(info->pFile);
 	//	m_mapFileIdToFileInfo.erase(strFileId);
 	//	delete info;
@@ -354,11 +354,11 @@ void Kernel::DealFileBlockRs(unsigned long lSendIP, const char* buf, int nLen)
 	std::cout << __func__ << std::endl;
 	STRU_FILE_BLOCK_RS* rs = (STRU_FILE_BLOCK_RS*)buf;
 	if (m_mapIdToSock.find(rs->friendid) == m_mapIdToSock.end()) {
-		// ºÃÓÑ²»ÔÚÏß
+		// å¥½å‹ä¸åœ¨çº¿
 		return;
 	}
 	else {
-		// ºÃÓÑÔÚÏß
+		// å¥½å‹åœ¨çº¿
 		SOCKET sockFriend = m_mapIdToSock[rs->friendid];
 		m_pServer->SendData(sockFriend, buf, nLen);
 	}
@@ -367,7 +367,7 @@ void Kernel::DealFileBlockRs(unsigned long lSendIP, const char* buf, int nLen)
 void Kernel::DealOfflineRq(unsigned long lSendIP, const char* buf, int nLen)
 {
 	STRU_OFFLINE* rq = (STRU_OFFLINE*)buf;
-	// ¸øÕâ¸öÇëÇó·¢ËÍÕßµÄËùÓĞºÃÓÑ·¢ËÍÏÂÏßÍ¨Öª
+	// ç»™è¿™ä¸ªè¯·æ±‚å‘é€è€…çš„æ‰€æœ‰å¥½å‹å‘é€ä¸‹çº¿é€šçŸ¥
 	std::list<std::string> lstRes;
 	char sqlbuf[1024] = "";
 	sprintf_s(sqlbuf, "select friend_id from t_friendship where uuid = '%d'", rq->uuid);
@@ -376,7 +376,7 @@ void Kernel::DealOfflineRq(unsigned long lSendIP, const char* buf, int nLen)
 	}
 	while (lstRes.size() > 0) {
 		int friendid = atoi(lstRes.front().c_str());
-		std::cout << "¸æËßºÃÓÑ" << friendid << "ºÃÓÑ" << rq->uuid << "ÏÂÏßÇëÇó" << std::endl;
+		std::cout << "å‘Šè¯‰å¥½å‹" << friendid << "å¥½å‹" << rq->uuid << "ä¸‹çº¿è¯·æ±‚" << std::endl;
 		lstRes.pop_front();
 		if (m_mapIdToSock.find(friendid) != m_mapIdToSock.end()) {
 			SOCKET sockFriend = m_mapIdToSock[friendid];

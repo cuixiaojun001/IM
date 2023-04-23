@@ -20,93 +20,93 @@ public:
 	}
 public:
 	/**
-	 * @brief ¿ªÆô·şÎñÆ÷
-	 * @return ³É¹¦·µ»Øtrue; Ê§°Ü·µ»Øfalse
+	 * @brief å¼€å¯æœåŠ¡å™¨
+	 * @return æˆåŠŸè¿”å›true; å¤±è´¥è¿”å›false
 	*/
 	bool startServer();
 	/**
-	 * @brief ¹Ø±Õ·şÎñÆ÷
+	 * @brief å…³é—­æœåŠ¡å™¨
 	*/
 	void closeServer();
 	/**
-	 * @brief ´¦ÀíÊı¾İ
+	 * @brief å¤„ç†æ•°æ®
 	 * @param lSendIP
 	 * @param buf
 	 * @param nLen
 	*/
 	void DealData(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦ÀíµÇÂ¼ÇëÇó
+	 * @brief å¤„ç†ç™»å½•è¯·æ±‚
 	 * @param lSendIP
 	 * @param buf
 	 * @param nLen
 	*/
 	void dealLoginRq(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦Àí×¢²áÇëÇó
+	 * @brief å¤„ç†æ³¨å†Œè¯·æ±‚
 	 * @param lSendIP
 	 * @param buf
 	 * @param nLen
 	*/
 	void dealRegisterRq(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief »ñµÃºÃÓÑÁĞ±í
+	 * @brief è·å¾—å¥½å‹åˆ—è¡¨
 	 * @param lSendIP
 	 * @param buf
 	 * @param nLen
 	*/
 	void getFriendList(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦ÀíÁÄÌìĞÅÏ¢
+	 * @brief å¤„ç†èŠå¤©ä¿¡æ¯
 	 * @param lSendIP
 	 * @param buf
 	 * @param nLen
 	*/
 	void dealChatRq(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦ÀíÌí¼ÓºÃÓÑÇëÇó
+	 * @brief å¤„ç†æ·»åŠ å¥½å‹è¯·æ±‚
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
 	*/
 	void dealAddFriendRq(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ¶Ô·½(ºÃÓÑ)»Ø¸´ÉêÇë
+	 * @brief å¯¹æ–¹(å¥½å‹)å›å¤ç”³è¯·
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
 	*/
 	void dealAddFriendRs(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´ÓÊı¾İ¿âÖĞ²éÑ¯ÓÃ»§ĞÅÏ¢
-	 * @param uuid ÓÃ»§id
-	 * @param info Êä³ö²ÎÊı, ĞÅÏ¢½á¹¹Ìå
+	 * @brief ä»æ•°æ®åº“ä¸­æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
+	 * @param uuid ç”¨æˆ·id
+	 * @param info è¾“å‡ºå‚æ•°, ä¿¡æ¯ç»“æ„ä½“
 	*/
 	void getFriendInfoFromSql(int uuid, STRU_FRIEND_INFO* info);
 
 	/**
-	 * @brief ´¦ÀíÎÄ¼ş´«ÊäĞÅÏ¢ÇëÇó
+	 * @brief å¤„ç†æ–‡ä»¶ä¼ è¾“ä¿¡æ¯è¯·æ±‚
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
 	*/
 	void DealFileInfoRq(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦ÀíÎÄ¼ş´«ÊäĞÅÏ¢»Ø¸´
+	 * @brief å¤„ç†æ–‡ä»¶ä¼ è¾“ä¿¡æ¯å›å¤
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
 	*/
 	void DealFileInfoRs(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦ÀíÎÄ¼ş¿éÇëÇó
+	 * @brief å¤„ç†æ–‡ä»¶å—è¯·æ±‚
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
 	*/
 	void DealFileBlockRq(unsigned long lSendIP, const char* buf, int nLen);
 	/**
-	 * @brief ´¦ÀíÎÄ¼ş¿é»Ø¸´
+	 * @brief å¤„ç†æ–‡ä»¶å—å›å¤
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
@@ -114,7 +114,7 @@ public:
 	void DealFileBlockRs(unsigned long lSendIP, const char* buf, int nLen);
 
 	/**
-	 * @brief ´¦ÀíÏÂÏßÇëÇó
+	 * @brief å¤„ç†ä¸‹çº¿è¯·æ±‚
 	 * @param lSendIP 
 	 * @param buf 
 	 * @param nLen 
@@ -122,18 +122,33 @@ public:
 	void DealOfflineRq(unsigned long lSendIP, const char* buf, int nLen);
 public:
 	/**
-	 * @brief ÉèÖÃº¯ÊıÓ³Éä
+	 * @brief è®¾ç½®å‡½æ•°æ˜ å°„
 	*/
 	void setProtocolMap();
 private:
+	/**
+	 * @brief Kernelç±»å”¯ä¸€å®ä¾‹
+	*/
 	static Kernel kernel;
+	/**
+	 * @brief åè®®å¤´ä¸å¤„ç†å‡½æ•°çš„æ˜ å°„
+	*/
 	static std::map<int, std::function<void(unsigned long, const char*, int)> > m_deal_items;
+	/**
+	 * @brief ç”¨æˆ·idä¸å¥—æ¥å­—çš„æ˜ å°„
+	*/
 	std::map<int, unsigned long> m_mapIdToSock;
 
+	/**
+	 * @brief æ•°æ®åº“æ¥å£
+	*/
 	mysql::CMySql m_sql;
+	/**
+	 * @brief ä¸­ä»‹è€…æ¥å£æŒ‡é’ˆ, ç”¨äºå°†ç½‘ç»œæ•°æ®å‘ç±»å†…ä¼ è¾“å’Œå°†Kernelå¤„ç†ç»“æœå‘é€åˆ°ç½‘ç»œä¸­
+	*/
 	net::INetMediator* m_pServer;
 	/**
-	 * @brief ÎÄ¼şidÓëÎÄ¼şĞÅÏ¢µÄÓ³Éä, ·½±ã¿çº¯Êı´«ÊäÎÄ¼ş¿é
+	 * @brief æ–‡ä»¶idä¸æ–‡ä»¶ä¿¡æ¯çš„æ˜ å°„, æ–¹ä¾¿è·¨å‡½æ•°ä¼ è¾“æ–‡ä»¶å—
 	*/
 	std::map<std::string, FileInfo*> m_mapFileIdToFileInfo;
 };

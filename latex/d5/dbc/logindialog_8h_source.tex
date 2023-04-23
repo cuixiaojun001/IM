@@ -1,0 +1,36 @@
+\hypertarget{logindialog_8h_source}{}\doxysection{logindialog.\+h}
+\label{logindialog_8h_source}\index{IMClient/logindialog.h@{IMClient/logindialog.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef LOGINDIALOG\_H}}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00002}00002 \textcolor{preprocessor}{\#define LOGINDIALOG\_H}}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00006}00006 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00007}00007 \textcolor{keyword}{class }\mbox{\hyperlink{classLoginDialog}{LoginDialog}};}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00008}00008 \}}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00010}\mbox{\hyperlink{classLoginDialog}{00010}} \textcolor{keyword}{class }\mbox{\hyperlink{classLoginDialog}{LoginDialog}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00011}00011 \{}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00012}00012     Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00013}00013 signals:}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00014}00014     \textcolor{keywordtype}{void} SIG\_LoginCommit( QString username , QString password);}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00015}00015     \textcolor{keywordtype}{void} SIG\_RegisterCommit( QString username, QString tel, QString password);}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00017}00017 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00018}00018     \textcolor{keyword}{explicit} \mbox{\hyperlink{classLoginDialog}{LoginDialog}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00019}00019     \mbox{\hyperlink{classLoginDialog}{\string~LoginDialog}}();}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00021}00021 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00022}00022     \textcolor{keywordtype}{void} \mbox{\hyperlink{classLoginDialog_aae8d9530d4c9f7c1b7f1bff628e87b46}{on\_pb\_commit\_clicked}}();}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00024}00024     \textcolor{keywordtype}{void} \mbox{\hyperlink{classLoginDialog_a8dc684625d63d6b40df8414343a00989}{on\_pb\_register\_clicked}}();}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00026}00026 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00027}00027     Ui::LoginDialog *ui;}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00028}00028 \};}
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{logindialog_8h_source_l00030}00030 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// LOGINDIALOG\_H}}
+
+\end{DoxyCode}

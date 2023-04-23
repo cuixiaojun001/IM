@@ -7,27 +7,27 @@ namespace net {
 		INetMediator() {}
 		virtual ~INetMediator() {}
 		/**
-		 * @brief ´ò¿ªÍøÂç
-		 * @return ³É¹¦·µ»Øtrue; Ê§°Ü·µ»Øfalse
+		 * @brief æ‰“å¼€ç½‘ç»œ
+		 * @return æˆåŠŸè¿”å›true; å¤±è´¥è¿”å›false
 		*/
 		virtual bool OpenNet() = 0;
 		/**
-		 * @brief ¹Ø±ÕÍøÂç
+		 * @brief å…³é—­ç½‘ç»œ
 		*/
 		virtual void CloseNet() = 0;
 		/**
-		 * @brief ·¢ËÍÊı¾İ
-		 * @param lSendIP ´¦Àí¿Í»§¶ËÇëÇóÌ×½Ó×Ö
-		 * @param buf Êı¾İ»º³åÇøÖ¸Õë
-		 * @param nLen Êı¾İ´óĞ¡
-		 * @return ³É¹¦·µ»Øtrue; Ê§°Ü·µ»Øfalse
+		 * @brief å‘é€æ•°æ®
+		 * @param lSendIP å¤„ç†å®¢æˆ·ç«¯è¯·æ±‚å¥—æ¥å­—
+		 * @param buf æ•°æ®ç¼“å†²åŒºæŒ‡é’ˆ
+		 * @param nLen æ•°æ®å¤§å°
+		 * @return æˆåŠŸè¿”å›true; å¤±è´¥è¿”å›false
 		*/
 		virtual bool SendData(unsigned long lSendIP, const char* buf, int nLen) = 0;
 		/**
-		 * @brief ´¦ÀíÊı¾İ
-		 * @param lSendIP ´¦Àí¿Í»§¶ËÇëÇóÌ×½Ó×Ö
-		 * @param buf Êı¾İ»º³åÇøÖ¸Õë
-		 * @param nLen Êı¾İ´óĞ¡
+		 * @brief å¤„ç†æ•°æ®
+		 * @param lSendIP å¤„ç†å®¢æˆ·ç«¯è¯·æ±‚å¥—æ¥å­—
+		 * @param buf æ•°æ®ç¼“å†²åŒºæŒ‡é’ˆ
+		 * @param nLen æ•°æ®å¤§å°
 		*/
 		virtual void DealData(unsigned long lSendIP, const char* buf, int nLen) = 0;
 	protected:

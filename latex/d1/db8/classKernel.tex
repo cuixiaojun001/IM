@@ -1,0 +1,1208 @@
+\hypertarget{classKernel}{}\doxysection{Kernel类 参考}
+\label{classKernel}\index{Kernel@{Kernel}}
+类 Kernel 继承关系图\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/db8/classKernel}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 槽}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKernel_a8e0dbecd3c1d2ff4dabeacb7d7eb0f5e}{slot\+\_\+\+Deal\+Data}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理数据 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a204549737919e8ebc064a9b7ef62298d}{slot\+\_\+\+Login\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理登录回复 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}{slot\+\_\+\+Register\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理注册回复 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}{slot\+\_\+\+Friend\+Info\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Friend\+Info\+Rq 获取好友信息请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a469be53950174972d58ae6f196d27473}{slot\+\_\+\+Chat\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Chat\+Rq 好友发来聊天请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a2e80c738deb690b807163f9d6a31ee30}{slot\+\_\+\+Chat\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Chat\+Rs 自己发出的聊天内容的回复 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}{slot\+\_\+add\+Friend\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+add\+Friend\+Rq 有其他用户发起添加好友声请 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a7b391301f52d2d008f513e5cb4020f3c}{slot\+\_\+add\+Friend\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+add\+Friend\+Rs 用户发起添加好友申请，服务器响应结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a6e2c878b3c7950965e76cc117be48059}{slot\+\_\+\+Deal\+File\+Info\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\item 
+void \mbox{\hyperlink{classKernel_a43a4974ea736e46be73f1db7325c5b69}{slot\+\_\+\+Deal\+File\+Info\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\item 
+void \mbox{\hyperlink{classKernel_ad70a66f3ff176b908125e889676e1df7}{slot\+\_\+\+Deal\+File\+Block\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\item 
+void \mbox{\hyperlink{classKernel_a9a111f413a855d5e270f8c74c6b05d23}{slot\+\_\+\+Deal\+File\+Block\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\item 
+void \mbox{\hyperlink{classKernel_a646a42de48aea4a2bd267e0f771efa5e}{slot\+\_\+\+Login\+Commit}} (QString username, QString password)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Login\+Commit 登录提交事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_aec00bbd36ea67f285fc2e516fef520b9}{slot\+\_\+\+Register\+Commit}} (QString username, QString tel, QString password)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Register\+Commit 注册提交事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a773bea13586e584bb49be5d05b4ea5dc}{slot\+\_\+user\+Item\+Clicked}} (int uuid)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+user\+Item\+Clicked 好友头像点击事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_ae8053324f7683214e8b197ce56179e53}{slot\+\_\+\+Send\+Chat\+Msg}} (int id, QString content)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Send\+Chat\+Msg 聊天信息发送按钮点击事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a5e02453ee98926ad2d0937ccf422f470}{slot\+\_\+add\+Friend\+Clicked}} ()
+\begin{DoxyCompactList}\small\item\em slot\+\_\+add\+Friend\+Clicked 添加好友点击事件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_afa81914f904d8da74bda000828cc36fa}{slot\+\_\+\+Send\+File}} (int id, QString filename, uint64\+\_\+t filesize)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Send\+File 发送文件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a77bce2e146702fc88f5fe593c1df2ada}{slot\+\_\+\+Deal\+Offine\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Deal\+Offine\+Rq 处理好友下线请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a802c41d00fdf0596413ab5e9b3419129}{slot\+\_\+\+Send\+Offline}} ()
+\begin{DoxyCompactList}\small\item\em slot\+\_\+\+Send\+Offline 发送离线请求 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classKernel_a3b1172f795a20d490ca002ff6dddac6c}{start\+Server}} ()
+\begin{DoxyCompactList}\small\item\em 开启服务器 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a77298443ac5447e2a04815869f30ae71}{close\+Server}} ()
+\begin{DoxyCompactList}\small\item\em 关闭服务器 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classKernel_a3b1172f795a20d490ca002ff6dddac6c}{start\+Server}} ()
+\begin{DoxyCompactList}\small\item\em 开启服务器 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classKernel_a77298443ac5447e2a04815869f30ae71}\label{classKernel_a77298443ac5447e2a04815869f30ae71}} 
+void {\bfseries close\+Server} ()
+\begin{DoxyCompactList}\small\item\em 关闭服务器 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_adfb337a6ecb4ad0aea405867db8b1b37}{Deal\+Data}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理数据 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a3cc5c37097bc85b3b5d24e0506a12c01}{deal\+Login\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理登录请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_af85c06c11ad4accb5c11a01f78eb761b}{deal\+Register\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理注册请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a8fba10366b52aed4af49c93d2f5f2e01}{get\+Friend\+List}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 获得好友列表 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a2d89fea0d7ba68be6d7feeb05f0dc81a}{deal\+Chat\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理聊天信息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a5b1899bea8386fe39eef431b92297b9d}{deal\+Add\+Friend\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理添加好友请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a4b9a62f1b1b0d937e75cacbc13fa2023}{deal\+Add\+Friend\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 对方(好友)回复申请 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a5f70a9b734ea66ae0117f0f6aee76676}{get\+Friend\+Info\+From\+Sql}} (int uuid, STRU\+\_\+\+FRIEND\+\_\+\+INFO $\ast$info)
+\begin{DoxyCompactList}\small\item\em 从数据库中查询用户信息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a6f2e1f9ad7f235aa62a7173af96d7175}{Deal\+File\+Info\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理文件传输信息请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a2ba72f35a54b2dc26440416f9ce8df6d}{Deal\+File\+Info\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理文件传输信息回复 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_aa9259e7ab3d47dd07a47e9d1c3596f7b}{Deal\+File\+Block\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理文件块请求 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a6b2b07102cb2abc6c362c11d5a466410}{Deal\+File\+Block\+Rs}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理文件块回复 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_aae49b56d649a757519bbe326aede85f9}{Deal\+Offline\+Rq}} (unsigned long l\+Send\+IP, const char $\ast$buf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em 处理下线请求 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}\label{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}} 
+void {\bfseries set\+Protocol\+Map} ()
+\begin{DoxyCompactList}\small\item\em 设置函数映射 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classKernel}{Kernel}} \& \mbox{\hyperlink{classKernel_a28f8b1aac334816093c779ad1da7198b}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}{set\+Protocol\+Map}} ()
+\begin{DoxyCompactList}\small\item\em 设置函数映射 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{Utf8\+To\+GB2312}} (QString \&utf8, char $\ast$gbbuf, int n\+Len)
+\begin{DoxyCompactList}\small\item\em Utf8字符集转\+GB2312 \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{GB2312\+To\+Utf8}} (char $\ast$gbbuf)
+\begin{DoxyCompactList}\small\item\em GB2312字符集转\+Utf8 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classKernel_adff83ffd06f1c450798e393d2cc4101b}{Get\+File\+Name}} (const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Get\+File\+Name 从文件路径中获取文件名 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classKernel_a44efeb221696f2645825839573ac3431}{Destroy\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Destroy\+Instance \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, std\+::function$<$ void(unsigned long, const char $\ast$, int)$>$ $>$ \mbox{\hyperlink{classKernel_acac22a8ced9ce63ab1ec3ba46eec5b58}{m\+\_\+deal\+\_\+items}}
+\item 
+net\+::\+INet\+Mediator $\ast$ \mbox{\hyperlink{classKernel_a8e4d9565eb856f59bc3eb2070dc60843}{m\+\_\+p\+Client}}
+\item 
+\mbox{\hyperlink{classLoginDialog}{Login\+Dialog}} $\ast$ \mbox{\hyperlink{classKernel_ad9908f6bdc7740340ece1ffd3695524d}{m\+\_\+login\+Dialog}}
+\item 
+\mbox{\hyperlink{classContactListDialog}{Contact\+List\+Dialog}} $\ast$ \mbox{\hyperlink{classKernel_a88989b996ef7bea0f8685aabd553d6d6}{m\+\_\+main\+Wnd}}
+\item 
+int \mbox{\hyperlink{classKernel_ac6823b2f6993c8a89bed89508fa8536e}{m\+\_\+uuid}}
+\item 
+QString \mbox{\hyperlink{classKernel_a7d29e2386e9f00245ab4674b3cfd127d}{m\+\_\+username}}
+\item 
+int \mbox{\hyperlink{classKernel_a9c25178d40dd0abf3faee3381b46fce3}{m\+\_\+state}}
+\item 
+QString \mbox{\hyperlink{classKernel_a8758f2f60e8e7ced62ab87c0c9ffb8ae}{m\+\_\+feeling}}
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{classUserItem}{User\+Item}} $\ast$ $>$ \mbox{\hyperlink{classKernel_aa628d3b960a96cac66018db8ec37c77c}{m\+\_\+map\+Id\+To\+User\+Item}}
+\item 
+std\+::map$<$ int, \mbox{\hyperlink{classChatDialog}{Chat\+Dialog}} $\ast$ $>$ \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\+\_\+map\+Id\+To\+Chat\+Dialog}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+map\+Id\+To\+Chat\+Dialog 好友id与聊天dialog的映射map \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, File\+Info $\ast$ $>$ \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\+\_\+map\+File\+Id\+To\+File\+Info}}
+\begin{DoxyCompactList}\small\item\em 文件id与文件信息的映射, 方便跨函数传输文件块 \end{DoxyCompactList}\item 
+std\+::map$<$ int, unsigned long $>$ \mbox{\hyperlink{classKernel_a836849eb037e22a3d1f51b6c4bb7972e}{m\+\_\+map\+Id\+To\+Sock}}
+\begin{DoxyCompactList}\small\item\em 用户id与套接字的映射 \end{DoxyCompactList}\item 
+mysql\+::\+CMy\+Sql \mbox{\hyperlink{classKernel_abb7128ba6e5b86836ac9bc2f5fe090ee}{m\+\_\+sql}}
+\begin{DoxyCompactList}\small\item\em 数据库接口 \end{DoxyCompactList}\item 
+net\+::\+INet\+Mediator $\ast$ \mbox{\hyperlink{classKernel_a78cd7e3795a457d65718b5e7de5ba912}{m\+\_\+p\+Server}}
+\begin{DoxyCompactList}\small\item\em 中介者接口指针, 用于将网络数据向类内传输和将\+Kernel处理结果发送到网络中 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classKernel}{Kernel}} \mbox{\hyperlink{classKernel_a8a555a80b71b7a434f8e8a6d3a510f5b}{kernel}}
+\begin{DoxyCompactList}\small\item\em Kernel类唯一实例 \end{DoxyCompactList}\item 
+static std\+::map$<$ int, std\+::function$<$ void(unsigned long, const char $\ast$, int)$>$ $>$ \mbox{\hyperlink{classKernel_a0094d4e510491e18d554f69cc46638d5}{m\+\_\+deal\+\_\+items}}
+\begin{DoxyCompactList}\small\item\em 协议头与处理函数的映射 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00017}{17}} 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classKernel_a84dba549c0823454ecfc8089c20cf812}\label{classKernel_a84dba549c0823454ecfc8089c20cf812}} 
+\index{Kernel@{Kernel}!Kernel@{Kernel}}
+\index{Kernel@{Kernel}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{Kernel()}{Kernel()}}
+{\footnotesize\ttfamily Kernel\+::\+Kernel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00013}{13}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a9c7407e3a0b1cb9b2f96e9a030187064}\label{classKernel_a9c7407e3a0b1cb9b2f96e9a030187064}} 
+\index{Kernel@{Kernel}!````~Kernel@{$\sim$Kernel}}
+\index{````~Kernel@{$\sim$Kernel}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{$\sim$Kernel()}{~Kernel()}}
+{\footnotesize\ttfamily Kernel\+::$\sim$\+Kernel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00036}{36}} 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classKernel_a77298443ac5447e2a04815869f30ae71}\label{classKernel_a77298443ac5447e2a04815869f30ae71}} 
+\index{Kernel@{Kernel}!closeServer@{closeServer}}
+\index{closeServer@{closeServer}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{closeServer()}{closeServer()}}
+{\footnotesize\ttfamily void Kernel\+::close\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+关闭服务器 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00046}{46}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a5b1899bea8386fe39eef431b92297b9d}\label{classKernel_a5b1899bea8386fe39eef431b92297b9d}} 
+\index{Kernel@{Kernel}!dealAddFriendRq@{dealAddFriendRq}}
+\index{dealAddFriendRq@{dealAddFriendRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{dealAddFriendRq()}{dealAddFriendRq()}}
+{\footnotesize\ttfamily void Kernel\+::deal\+Add\+Friend\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理添加好友请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00164}{164}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a4b9a62f1b1b0d937e75cacbc13fa2023}\label{classKernel_a4b9a62f1b1b0d937e75cacbc13fa2023}} 
+\index{Kernel@{Kernel}!dealAddFriendRs@{dealAddFriendRs}}
+\index{dealAddFriendRs@{dealAddFriendRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{dealAddFriendRs()}{dealAddFriendRs()}}
+{\footnotesize\ttfamily void Kernel\+::deal\+Add\+Friend\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+对方(好友)回复申请 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00205}{205}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a2d89fea0d7ba68be6d7feeb05f0dc81a}\label{classKernel_a2d89fea0d7ba68be6d7feeb05f0dc81a}} 
+\index{Kernel@{Kernel}!dealChatRq@{dealChatRq}}
+\index{dealChatRq@{dealChatRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{dealChatRq()}{dealChatRq()}}
+{\footnotesize\ttfamily void Kernel\+::deal\+Chat\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理聊天信息 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00146}{146}} 行定义.
+
+\mbox{\Hypertarget{classKernel_adfb337a6ecb4ad0aea405867db8b1b37}\label{classKernel_adfb337a6ecb4ad0aea405867db8b1b37}} 
+\index{Kernel@{Kernel}!DealData@{DealData}}
+\index{DealData@{DealData}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DealData()}{DealData()}}
+{\footnotesize\ttfamily void Kernel\+::\+Deal\+Data (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理数据 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00035}{35}} 行定义.
+
+\mbox{\Hypertarget{classKernel_aa9259e7ab3d47dd07a47e9d1c3596f7b}\label{classKernel_aa9259e7ab3d47dd07a47e9d1c3596f7b}} 
+\index{Kernel@{Kernel}!DealFileBlockRq@{DealFileBlockRq}}
+\index{DealFileBlockRq@{DealFileBlockRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DealFileBlockRq()}{DealFileBlockRq()}}
+{\footnotesize\ttfamily void Kernel\+::\+Deal\+File\+Block\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理文件块请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00319}{319}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a6b2b07102cb2abc6c362c11d5a466410}\label{classKernel_a6b2b07102cb2abc6c362c11d5a466410}} 
+\index{Kernel@{Kernel}!DealFileBlockRs@{DealFileBlockRs}}
+\index{DealFileBlockRs@{DealFileBlockRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DealFileBlockRs()}{DealFileBlockRs()}}
+{\footnotesize\ttfamily void Kernel\+::\+Deal\+File\+Block\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理文件块回复 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00352}{352}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a6f2e1f9ad7f235aa62a7173af96d7175}\label{classKernel_a6f2e1f9ad7f235aa62a7173af96d7175}} 
+\index{Kernel@{Kernel}!DealFileInfoRq@{DealFileInfoRq}}
+\index{DealFileInfoRq@{DealFileInfoRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DealFileInfoRq()}{DealFileInfoRq()}}
+{\footnotesize\ttfamily void Kernel\+::\+Deal\+File\+Info\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理文件传输信息请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00253}{253}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a2ba72f35a54b2dc26440416f9ce8df6d}\label{classKernel_a2ba72f35a54b2dc26440416f9ce8df6d}} 
+\index{Kernel@{Kernel}!DealFileInfoRs@{DealFileInfoRs}}
+\index{DealFileInfoRs@{DealFileInfoRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DealFileInfoRs()}{DealFileInfoRs()}}
+{\footnotesize\ttfamily void Kernel\+::\+Deal\+File\+Info\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理文件传输信息回复 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00303}{303}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a3cc5c37097bc85b3b5d24e0506a12c01}\label{classKernel_a3cc5c37097bc85b3b5d24e0506a12c01}} 
+\index{Kernel@{Kernel}!dealLoginRq@{dealLoginRq}}
+\index{dealLoginRq@{dealLoginRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{dealLoginRq()}{dealLoginRq()}}
+{\footnotesize\ttfamily void Kernel\+::deal\+Login\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理登录请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00045}{45}} 行定义.
+
+\mbox{\Hypertarget{classKernel_aae49b56d649a757519bbe326aede85f9}\label{classKernel_aae49b56d649a757519bbe326aede85f9}} 
+\index{Kernel@{Kernel}!DealOfflineRq@{DealOfflineRq}}
+\index{DealOfflineRq@{DealOfflineRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DealOfflineRq()}{DealOfflineRq()}}
+{\footnotesize\ttfamily void Kernel\+::\+Deal\+Offline\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理下线请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00367}{367}} 行定义.
+
+\mbox{\Hypertarget{classKernel_af85c06c11ad4accb5c11a01f78eb761b}\label{classKernel_af85c06c11ad4accb5c11a01f78eb761b}} 
+\index{Kernel@{Kernel}!dealRegisterRq@{dealRegisterRq}}
+\index{dealRegisterRq@{dealRegisterRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{dealRegisterRq()}{dealRegisterRq()}}
+{\footnotesize\ttfamily void Kernel\+::deal\+Register\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+处理注册请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00085}{85}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a44efeb221696f2645825839573ac3431}\label{classKernel_a44efeb221696f2645825839573ac3431}} 
+\index{Kernel@{Kernel}!DestroyInstance@{DestroyInstance}}
+\index{DestroyInstance@{DestroyInstance}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{DestroyInstance()}{DestroyInstance()}}
+{\footnotesize\ttfamily void Kernel\+::\+Destroy\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Destroy\+Instance 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00100}{100}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a391d4b503cc61cc9a3f890180248bcb2}\label{classKernel_a391d4b503cc61cc9a3f890180248bcb2}} 
+\index{Kernel@{Kernel}!GB2312ToUtf8@{GB2312ToUtf8}}
+\index{GB2312ToUtf8@{GB2312ToUtf8}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{GB2312ToUtf8()}{GB2312ToUtf8()}}
+{\footnotesize\ttfamily QString Kernel\+::\+GB2312\+To\+Utf8 (\begin{DoxyParamCaption}\item[{char $\ast$}]{gbbuf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+GB2312字符集转\+Utf8 
+
+
+\begin{DoxyParams}{参数}
+{\em gbbuf} & char$\ast$ 字符串 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+QString字符串 
+\end{DoxyReturn}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00080}{80}} 行定义.
+
+\mbox{\Hypertarget{classKernel_adff83ffd06f1c450798e393d2cc4101b}\label{classKernel_adff83ffd06f1c450798e393d2cc4101b}} 
+\index{Kernel@{Kernel}!GetFileName@{GetFileName}}
+\index{GetFileName@{GetFileName}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{GetFileName()}{GetFileName()}}
+{\footnotesize\ttfamily std\+::string Kernel\+::\+Get\+File\+Name (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get\+File\+Name 从文件路径中获取文件名 
+
+
+\begin{DoxyParams}{参数}
+{\em path} & 文件绝对路径 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+
+\end{DoxyReturn}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00086}{86}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a5f70a9b734ea66ae0117f0f6aee76676}\label{classKernel_a5f70a9b734ea66ae0117f0f6aee76676}} 
+\index{Kernel@{Kernel}!getFriendInfoFromSql@{getFriendInfoFromSql}}
+\index{getFriendInfoFromSql@{getFriendInfoFromSql}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{getFriendInfoFromSql()}{getFriendInfoFromSql()}}
+{\footnotesize\ttfamily void Kernel\+::get\+Friend\+Info\+From\+Sql (\begin{DoxyParamCaption}\item[{int}]{uuid,  }\item[{STRU\+\_\+\+FRIEND\+\_\+\+INFO $\ast$}]{info }\end{DoxyParamCaption})}
+
+
+
+从数据库中查询用户信息 
+
+
+\begin{DoxyParams}{参数}
+{\em uuid} & 用户id \\
+\hline
+{\em info} & 输出参数, 信息结构体 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00228}{228}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a8fba10366b52aed4af49c93d2f5f2e01}\label{classKernel_a8fba10366b52aed4af49c93d2f5f2e01}} 
+\index{Kernel@{Kernel}!getFriendList@{getFriendList}}
+\index{getFriendList@{getFriendList}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{getFriendList()}{getFriendList()}}
+{\footnotesize\ttfamily void Kernel\+::get\+Friend\+List (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})}
+
+
+
+获得好友列表 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{Kernel_8cpp_source}{Kernel.\+cpp}} 第 \mbox{\hyperlink{Kernel_8cpp_source_l00113}{113}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a28f8b1aac334816093c779ad1da7198b}\label{classKernel_a28f8b1aac334816093c779ad1da7198b}} 
+\index{Kernel@{Kernel}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classKernel}{Kernel}} \& Kernel\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+在文件 \mbox{\hyperlink{Kernel_8h_source}{Kernel.\+h}} 第 \mbox{\hyperlink{Kernel_8h_source_l00018}{18}} 行定义.
+
+\mbox{\Hypertarget{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}\label{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}} 
+\index{Kernel@{Kernel}!setProtocolMap@{setProtocolMap}}
+\index{setProtocolMap@{setProtocolMap}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{setProtocolMap()}{setProtocolMap()}}
+{\footnotesize\ttfamily void Kernel\+::set\+Protocol\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+设置函数映射 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00052}{52}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a5e02453ee98926ad2d0937ccf422f470}\label{classKernel_a5e02453ee98926ad2d0937ccf422f470}} 
+\index{Kernel@{Kernel}!slot\_addFriendClicked@{slot\_addFriendClicked}}
+\index{slot\_addFriendClicked@{slot\_addFriendClicked}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_addFriendClicked}{slot\_addFriendClicked}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+add\+Friend\+Clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+add\+Friend\+Clicked 添加好友点击事件 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00476}{476}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}\label{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}} 
+\index{Kernel@{Kernel}!slot\_addFriendRq@{slot\_addFriendRq}}
+\index{slot\_addFriendRq@{slot\_addFriendRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_addFriendRq}{slot\_addFriendRq}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+add\+Friend\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+add\+Friend\+Rq 有其他用户发起添加好友声请 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00226}{226}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a7b391301f52d2d008f513e5cb4020f3c}\label{classKernel_a7b391301f52d2d008f513e5cb4020f3c}} 
+\index{Kernel@{Kernel}!slot\_addFriendRs@{slot\_addFriendRs}}
+\index{slot\_addFriendRs@{slot\_addFriendRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_addFriendRs}{slot\_addFriendRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+add\+Friend\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+add\+Friend\+Rs 用户发起添加好友申请，服务器响应结果 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00241}{241}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a469be53950174972d58ae6f196d27473}\label{classKernel_a469be53950174972d58ae6f196d27473}} 
+\index{Kernel@{Kernel}!slot\_ChatRq@{slot\_ChatRq}}
+\index{slot\_ChatRq@{slot\_ChatRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_ChatRq}{slot\_ChatRq}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Chat\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Chat\+Rq 好友发来聊天请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00206}{206}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a2e80c738deb690b807163f9d6a31ee30}\label{classKernel_a2e80c738deb690b807163f9d6a31ee30}} 
+\index{Kernel@{Kernel}!slot\_ChatRs@{slot\_ChatRs}}
+\index{slot\_ChatRs@{slot\_ChatRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_ChatRs}{slot\_ChatRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Chat\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Chat\+Rs 自己发出的聊天内容的回复 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00217}{217}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a8e0dbecd3c1d2ff4dabeacb7d7eb0f5e}\label{classKernel_a8e0dbecd3c1d2ff4dabeacb7d7eb0f5e}} 
+\index{Kernel@{Kernel}!slot\_DealData@{slot\_DealData}}
+\index{slot\_DealData@{slot\_DealData}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_DealData}{slot\_DealData}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Deal\+Data (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+处理数据 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00127}{127}} 行定义.
+
+\mbox{\Hypertarget{classKernel_ad70a66f3ff176b908125e889676e1df7}\label{classKernel_ad70a66f3ff176b908125e889676e1df7}} 
+\index{Kernel@{Kernel}!slot\_DealFileBlockRq@{slot\_DealFileBlockRq}}
+\index{slot\_DealFileBlockRq@{slot\_DealFileBlockRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_DealFileBlockRq}{slot\_DealFileBlockRq}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Deal\+File\+Block\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00370}{370}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a9a111f413a855d5e270f8c74c6b05d23}\label{classKernel_a9a111f413a855d5e270f8c74c6b05d23}} 
+\index{Kernel@{Kernel}!slot\_DealFileBlockRs@{slot\_DealFileBlockRs}}
+\index{slot\_DealFileBlockRs@{slot\_DealFileBlockRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_DealFileBlockRs}{slot\_DealFileBlockRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Deal\+File\+Block\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00408}{408}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a6e2c878b3c7950965e76cc117be48059}\label{classKernel_a6e2c878b3c7950965e76cc117be48059}} 
+\index{Kernel@{Kernel}!slot\_DealFileInfoRq@{slot\_DealFileInfoRq}}
+\index{slot\_DealFileInfoRq@{slot\_DealFileInfoRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_DealFileInfoRq}{slot\_DealFileInfoRq}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Deal\+File\+Info\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00261}{261}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a43a4974ea736e46be73f1db7325c5b69}\label{classKernel_a43a4974ea736e46be73f1db7325c5b69}} 
+\index{Kernel@{Kernel}!slot\_DealFileInfoRs@{slot\_DealFileInfoRs}}
+\index{slot\_DealFileInfoRs@{slot\_DealFileInfoRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_DealFileInfoRs}{slot\_DealFileInfoRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Deal\+File\+Info\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00322}{322}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a77bce2e146702fc88f5fe593c1df2ada}\label{classKernel_a77bce2e146702fc88f5fe593c1df2ada}} 
+\index{Kernel@{Kernel}!slot\_DealOffineRq@{slot\_DealOffineRq}}
+\index{slot\_DealOffineRq@{slot\_DealOffineRq}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_DealOffineRq}{slot\_DealOffineRq}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Deal\+Offine\+Rq (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Deal\+Offine\+Rq 处理好友下线请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00538}{538}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}\label{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}} 
+\index{Kernel@{Kernel}!slot\_FriendInfoRs@{slot\_FriendInfoRs}}
+\index{slot\_FriendInfoRs@{slot\_FriendInfoRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_FriendInfoRs}{slot\_FriendInfoRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Friend\+Info\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Friend\+Info\+Rq 获取好友信息请求 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00171}{171}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a646a42de48aea4a2bd267e0f771efa5e}\label{classKernel_a646a42de48aea4a2bd267e0f771efa5e}} 
+\index{Kernel@{Kernel}!slot\_LoginCommit@{slot\_LoginCommit}}
+\index{slot\_LoginCommit@{slot\_LoginCommit}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_LoginCommit}{slot\_LoginCommit}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Login\+Commit (\begin{DoxyParamCaption}\item[{QString}]{username,  }\item[{QString}]{password }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Login\+Commit 登录提交事件 
+
+
+\begin{DoxyParams}{参数}
+{\em username} & 用户名 \\
+\hline
+{\em password} & 密码 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00429}{429}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a204549737919e8ebc064a9b7ef62298d}\label{classKernel_a204549737919e8ebc064a9b7ef62298d}} 
+\index{Kernel@{Kernel}!slot\_LoginRs@{slot\_LoginRs}}
+\index{slot\_LoginRs@{slot\_LoginRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_LoginRs}{slot\_LoginRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Login\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+处理登录回复 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00136}{136}} 行定义.
+
+\mbox{\Hypertarget{classKernel_aec00bbd36ea67f285fc2e516fef520b9}\label{classKernel_aec00bbd36ea67f285fc2e516fef520b9}} 
+\index{Kernel@{Kernel}!slot\_RegisterCommit@{slot\_RegisterCommit}}
+\index{slot\_RegisterCommit@{slot\_RegisterCommit}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_RegisterCommit}{slot\_RegisterCommit}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Register\+Commit (\begin{DoxyParamCaption}\item[{QString}]{username,  }\item[{QString}]{tel,  }\item[{QString}]{password }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Register\+Commit 注册提交事件 
+
+
+\begin{DoxyParams}{参数}
+{\em username} & 用户名 \\
+\hline
+{\em tel} & 电话号码 \\
+\hline
+{\em password} & 密码 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00441}{441}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}\label{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}} 
+\index{Kernel@{Kernel}!slot\_RegisterRs@{slot\_RegisterRs}}
+\index{slot\_RegisterRs@{slot\_RegisterRs}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_RegisterRs}{slot\_RegisterRs}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Register\+Rs (\begin{DoxyParamCaption}\item[{unsigned long}]{l\+Send\+IP,  }\item[{const char $\ast$}]{buf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+处理注册回复 
+
+
+\begin{DoxyParams}{参数}
+{\em l\+Send\+IP} & \\
+\hline
+{\em buf} & \\
+\hline
+{\em n\+Len} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00158}{158}} 行定义.
+
+\mbox{\Hypertarget{classKernel_ae8053324f7683214e8b197ce56179e53}\label{classKernel_ae8053324f7683214e8b197ce56179e53}} 
+\index{Kernel@{Kernel}!slot\_SendChatMsg@{slot\_SendChatMsg}}
+\index{slot\_SendChatMsg@{slot\_SendChatMsg}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_SendChatMsg}{slot\_SendChatMsg}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Send\+Chat\+Msg (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{QString}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Send\+Chat\+Msg 聊天信息发送按钮点击事件 
+
+
+\begin{DoxyParams}{参数}
+{\em id} & \\
+\hline
+{\em content} & \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00465}{465}} 行定义.
+
+\mbox{\Hypertarget{classKernel_afa81914f904d8da74bda000828cc36fa}\label{classKernel_afa81914f904d8da74bda000828cc36fa}} 
+\index{Kernel@{Kernel}!slot\_SendFile@{slot\_SendFile}}
+\index{slot\_SendFile@{slot\_SendFile}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_SendFile}{slot\_SendFile}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Send\+File (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{QString}]{filename,  }\item[{uint64\+\_\+t}]{filesize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Send\+File 发送文件 
+
+
+\begin{DoxyParams}{参数}
+{\em id} & 要发送给的好友id \\
+\hline
+{\em filename} & 文件名，包括文件路径 \\
+\hline
+{\em filesize} & 文件大小 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00505}{505}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a802c41d00fdf0596413ab5e9b3419129}\label{classKernel_a802c41d00fdf0596413ab5e9b3419129}} 
+\index{Kernel@{Kernel}!slot\_SendOffline@{slot\_SendOffline}}
+\index{slot\_SendOffline@{slot\_SendOffline}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_SendOffline}{slot\_SendOffline}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+\+Send\+Offline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+\+Send\+Offline 发送离线请求 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00548}{548}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a773bea13586e584bb49be5d05b4ea5dc}\label{classKernel_a773bea13586e584bb49be5d05b4ea5dc}} 
+\index{Kernel@{Kernel}!slot\_userItemClicked@{slot\_userItemClicked}}
+\index{slot\_userItemClicked@{slot\_userItemClicked}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{slot\_userItemClicked}{slot\_userItemClicked}}
+{\footnotesize\ttfamily void Kernel\+::slot\+\_\+user\+Item\+Clicked (\begin{DoxyParamCaption}\item[{int}]{uuid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+slot\+\_\+user\+Item\+Clicked 好友头像点击事件 
+
+
+\begin{DoxyParams}{参数}
+{\em uuid} & 好友唯一id \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00455}{455}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a3b1172f795a20d490ca002ff6dddac6c}\label{classKernel_a3b1172f795a20d490ca002ff6dddac6c}} 
+\index{Kernel@{Kernel}!startServer@{startServer}}
+\index{startServer@{startServer}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{startServer()}{startServer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Kernel\+::start\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+开启服务器 
+
+\begin{DoxyReturn}{返回}
+成功返回true; 失败返回false 
+\end{DoxyReturn}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00040}{40}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a3b1172f795a20d490ca002ff6dddac6c}\label{classKernel_a3b1172f795a20d490ca002ff6dddac6c}} 
+\index{Kernel@{Kernel}!startServer@{startServer}}
+\index{startServer@{startServer}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{startServer()}{startServer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Kernel\+::start\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+开启服务器 
+
+\begin{DoxyReturn}{返回}
+成功返回true; 失败返回false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}\label{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}} 
+\index{Kernel@{Kernel}!Utf8ToGB2312@{Utf8ToGB2312}}
+\index{Utf8ToGB2312@{Utf8ToGB2312}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{Utf8ToGB2312()}{Utf8ToGB2312()}}
+{\footnotesize\ttfamily void Kernel\+::\+Utf8\+To\+GB2312 (\begin{DoxyParamCaption}\item[{QString \&}]{utf8,  }\item[{char $\ast$}]{gbbuf,  }\item[{int}]{n\+Len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Utf8字符集转\+GB2312 
+
+
+\begin{DoxyParams}{参数}
+{\em utf8} & QString字符串 \\
+\hline
+{\em gbbuf} & char$\ast$字符串 \\
+\hline
+{\em n\+Len} & gbbuf大小 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 \mbox{\hyperlink{kernel_8cpp_source}{kernel.\+cpp}} 第 \mbox{\hyperlink{kernel_8cpp_source_l00073}{73}} 行定义.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classKernel_a8a555a80b71b7a434f8e8a6d3a510f5b}\label{classKernel_a8a555a80b71b7a434f8e8a6d3a510f5b}} 
+\index{Kernel@{Kernel}!kernel@{kernel}}
+\index{kernel@{kernel}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{kernel}{kernel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classKernel}{Kernel}} Kernel\+::kernel\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Kernel类唯一实例 
+
+
+
+在文件 \mbox{\hyperlink{Kernel_8h_source}{Kernel.\+h}} 第 \mbox{\hyperlink{Kernel_8h_source_l00132}{132}} 行定义.
+
+\mbox{\Hypertarget{classKernel_acac22a8ced9ce63ab1ec3ba46eec5b58}\label{classKernel_acac22a8ced9ce63ab1ec3ba46eec5b58}} 
+\index{Kernel@{Kernel}!m\_deal\_items@{m\_deal\_items}}
+\index{m\_deal\_items@{m\_deal\_items}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_deal\_items}{m\_deal\_items}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::map$<$ int, std\+::function$<$ void(unsigned long, const char $\ast$, int)$>$ $>$ Kernel\+::m\+\_\+deal\+\_\+items\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00180}{180}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a0094d4e510491e18d554f69cc46638d5}\label{classKernel_a0094d4e510491e18d554f69cc46638d5}} 
+\index{Kernel@{Kernel}!m\_deal\_items@{m\_deal\_items}}
+\index{m\_deal\_items@{m\_deal\_items}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_deal\_items}{m\_deal\_items}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::map$<$int, std\+::function$<$void(unsigned long, const char$\ast$, int)$>$ $>$ Kernel\+::m\+\_\+deal\+\_\+items\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+协议头与处理函数的映射 
+
+
+
+在文件 \mbox{\hyperlink{Kernel_8h_source}{Kernel.\+h}} 第 \mbox{\hyperlink{Kernel_8h_source_l00136}{136}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a8758f2f60e8e7ced62ab87c0c9ffb8ae}\label{classKernel_a8758f2f60e8e7ced62ab87c0c9ffb8ae}} 
+\index{Kernel@{Kernel}!m\_feeling@{m\_feeling}}
+\index{m\_feeling@{m\_feeling}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_feeling}{m\_feeling}}
+{\footnotesize\ttfamily QString Kernel\+::m\+\_\+feeling\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00191}{191}} 行定义.
+
+\mbox{\Hypertarget{classKernel_ad9908f6bdc7740340ece1ffd3695524d}\label{classKernel_ad9908f6bdc7740340ece1ffd3695524d}} 
+\index{Kernel@{Kernel}!m\_loginDialog@{m\_loginDialog}}
+\index{m\_loginDialog@{m\_loginDialog}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_loginDialog}{m\_loginDialog}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLoginDialog}{Login\+Dialog}}$\ast$ Kernel\+::m\+\_\+login\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00184}{184}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a88989b996ef7bea0f8685aabd553d6d6}\label{classKernel_a88989b996ef7bea0f8685aabd553d6d6}} 
+\index{Kernel@{Kernel}!m\_mainWnd@{m\_mainWnd}}
+\index{m\_mainWnd@{m\_mainWnd}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_mainWnd}{m\_mainWnd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classContactListDialog}{Contact\+List\+Dialog}}$\ast$ Kernel\+::m\+\_\+main\+Wnd\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00185}{185}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}\label{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}} 
+\index{Kernel@{Kernel}!m\_mapFileIdToFileInfo@{m\_mapFileIdToFileInfo}}
+\index{m\_mapFileIdToFileInfo@{m\_mapFileIdToFileInfo}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_mapFileIdToFileInfo}{m\_mapFileIdToFileInfo}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, File\+Info $\ast$ $>$ Kernel\+::m\+\_\+map\+File\+Id\+To\+File\+Info\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+文件id与文件信息的映射, 方便跨函数传输文件块 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00200}{200}} 行定义.
+
+\mbox{\Hypertarget{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}\label{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}} 
+\index{Kernel@{Kernel}!m\_mapIdToChatDialog@{m\_mapIdToChatDialog}}
+\index{m\_mapIdToChatDialog@{m\_mapIdToChatDialog}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_mapIdToChatDialog}{m\_mapIdToChatDialog}}
+{\footnotesize\ttfamily std\+::map$<$int, \mbox{\hyperlink{classChatDialog}{Chat\+Dialog}}$\ast$$>$ Kernel\+::m\+\_\+map\+Id\+To\+Chat\+Dialog\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+m\+\_\+map\+Id\+To\+Chat\+Dialog 好友id与聊天dialog的映射map 
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00198}{198}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a836849eb037e22a3d1f51b6c4bb7972e}\label{classKernel_a836849eb037e22a3d1f51b6c4bb7972e}} 
+\index{Kernel@{Kernel}!m\_mapIdToSock@{m\_mapIdToSock}}
+\index{m\_mapIdToSock@{m\_mapIdToSock}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_mapIdToSock}{m\_mapIdToSock}}
+{\footnotesize\ttfamily std\+::map$<$int, unsigned long$>$ Kernel\+::m\+\_\+map\+Id\+To\+Sock\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+用户id与套接字的映射 
+
+
+
+在文件 \mbox{\hyperlink{Kernel_8h_source}{Kernel.\+h}} 第 \mbox{\hyperlink{Kernel_8h_source_l00140}{140}} 行定义.
+
+\mbox{\Hypertarget{classKernel_aa628d3b960a96cac66018db8ec37c77c}\label{classKernel_aa628d3b960a96cac66018db8ec37c77c}} 
+\index{Kernel@{Kernel}!m\_mapIdToUserItem@{m\_mapIdToUserItem}}
+\index{m\_mapIdToUserItem@{m\_mapIdToUserItem}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_mapIdToUserItem}{m\_mapIdToUserItem}}
+{\footnotesize\ttfamily std\+::map$<$int, \mbox{\hyperlink{classUserItem}{User\+Item}}$\ast$$>$ Kernel\+::m\+\_\+map\+Id\+To\+User\+Item\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00194}{194}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a8e4d9565eb856f59bc3eb2070dc60843}\label{classKernel_a8e4d9565eb856f59bc3eb2070dc60843}} 
+\index{Kernel@{Kernel}!m\_pClient@{m\_pClient}}
+\index{m\_pClient@{m\_pClient}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_pClient}{m\_pClient}}
+{\footnotesize\ttfamily net\+::\+INet\+Mediator$\ast$ Kernel\+::m\+\_\+p\+Client\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00181}{181}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a78cd7e3795a457d65718b5e7de5ba912}\label{classKernel_a78cd7e3795a457d65718b5e7de5ba912}} 
+\index{Kernel@{Kernel}!m\_pServer@{m\_pServer}}
+\index{m\_pServer@{m\_pServer}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_pServer}{m\_pServer}}
+{\footnotesize\ttfamily net\+::\+INet\+Mediator$\ast$ Kernel\+::m\+\_\+p\+Server\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+中介者接口指针, 用于将网络数据向类内传输和将\+Kernel处理结果发送到网络中 
+
+
+
+在文件 \mbox{\hyperlink{Kernel_8h_source}{Kernel.\+h}} 第 \mbox{\hyperlink{Kernel_8h_source_l00149}{149}} 行定义.
+
+\mbox{\Hypertarget{classKernel_abb7128ba6e5b86836ac9bc2f5fe090ee}\label{classKernel_abb7128ba6e5b86836ac9bc2f5fe090ee}} 
+\index{Kernel@{Kernel}!m\_sql@{m\_sql}}
+\index{m\_sql@{m\_sql}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_sql}{m\_sql}}
+{\footnotesize\ttfamily mysql\+::\+CMy\+Sql Kernel\+::m\+\_\+sql\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+数据库接口 
+
+
+
+在文件 \mbox{\hyperlink{Kernel_8h_source}{Kernel.\+h}} 第 \mbox{\hyperlink{Kernel_8h_source_l00145}{145}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a9c25178d40dd0abf3faee3381b46fce3}\label{classKernel_a9c25178d40dd0abf3faee3381b46fce3}} 
+\index{Kernel@{Kernel}!m\_state@{m\_state}}
+\index{m\_state@{m\_state}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_state}{m\_state}}
+{\footnotesize\ttfamily int Kernel\+::m\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00190}{190}} 行定义.
+
+\mbox{\Hypertarget{classKernel_a7d29e2386e9f00245ab4674b3cfd127d}\label{classKernel_a7d29e2386e9f00245ab4674b3cfd127d}} 
+\index{Kernel@{Kernel}!m\_username@{m\_username}}
+\index{m\_username@{m\_username}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_username}{m\_username}}
+{\footnotesize\ttfamily QString Kernel\+::m\+\_\+username\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00189}{189}} 行定义.
+
+\mbox{\Hypertarget{classKernel_ac6823b2f6993c8a89bed89508fa8536e}\label{classKernel_ac6823b2f6993c8a89bed89508fa8536e}} 
+\index{Kernel@{Kernel}!m\_uuid@{m\_uuid}}
+\index{m\_uuid@{m\_uuid}!Kernel@{Kernel}}
+\doxysubsubsection{\texorpdfstring{m\_uuid}{m\_uuid}}
+{\footnotesize\ttfamily int Kernel\+::m\+\_\+uuid\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 \mbox{\hyperlink{kernel_8h_source}{kernel.\+h}} 第 \mbox{\hyperlink{kernel_8h_source_l00188}{188}} 行定义.
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+IMClient/kernel.\+h\item 
+IMServer/Kernel.\+h\item 
+IMClient/kernel.\+cpp\item 
+IMServer/Kernel.\+cpp\end{DoxyCompactItemize}

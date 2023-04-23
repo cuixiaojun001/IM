@@ -7,67 +7,68 @@
 #include "../mediator/INetMediator.h"
 
 namespace net {
+	/**
+	 * @brief TCPæœåŠ¡å™¨ Socket
+	*/
 	class TcpServer : public INet
 	{
 	public:
 		TcpServer(INetMediator* pMediator);
 		~TcpServer();
 		/**
-		 * @brief ³õÊ¼»¯ÍøÂç
-		 * @return ³É¹¦·µ»Øtrue, Ê§°Ü·µ»Øfalse
+		 * @brief åˆå§‹åŒ–ç½‘ç»œ
+		 * @return æˆåŠŸè¿”å›true, å¤±è´¥è¿”å›false
 		*/
 		bool InitNet() override;
 		/**
-		 * @brief ¹Ø±ÕÍøÂç
+		 * @brief å…³é—­ç½‘ç»œ
 		*/
 		void UnInitNet() override;
 		/**
-		 * @brief ·¢ËÍĞÅÏ¢: Í¬Ê±¼æÈİTCPºÍUDP
-		 * @param lSendIP ´¦Àí¿Í»§¶ËÇëÇóÌ×½Ó×Ö
-		 * @param buf ´«ÊäÊı¾İ»º³åÇøµÄÖ¸Õë
-		 * @param nLen Êı¾İ³¤¶È
-		 * @return ³É¹¦·µ»Øtrue, Ê§°Ü·µ»Øfalse
+		 * @brief å‘é€ä¿¡æ¯: åŒæ—¶å…¼å®¹TCPå’ŒUDP
+		 * @param lSendIP å¤„ç†å®¢æˆ·ç«¯è¯·æ±‚å¥—æ¥å­—
+		 * @param buf ä¼ è¾“æ•°æ®ç¼“å†²åŒºçš„æŒ‡é’ˆ
+		 * @param nLen æ•°æ®é•¿åº¦
+		 * @return æˆåŠŸè¿”å›true, å¤±è´¥è¿”å›false
 		*/
 		bool SendData(unsigned long lSendIP, const char* buf, int nLen) override;
 	protected:
 		/**
-		 * @brief ½ÓÊÜĞÅÏ¢
+		 * @brief æ¥å—ä¿¡æ¯
 		*/
 		void RecvData() override;
 	private:
 		/**
-		 * @brief ½ÓÊÜ¿Í»§¶ËÁ¬½ÓÇëÇóÏß³Ì, ½ö´ËÒ»¸ö
+		 * @brief æ¥å—å®¢æˆ·ç«¯è¿æ¥è¯·æ±‚çº¿ç¨‹, ä»…æ­¤ä¸€ä¸ª
 		 * @param lpParameter
 		 * @return
 		*/
 		static unsigned int __stdcall AcceptThread(LPVOID lpParameter);
 		/**
-		 * @brief Óë¿Í»§¶Ë½»»¥µÄÏß³Ì, Ã¿¸ö¿Í»§¶Ë¶ÔÓ¦Ò»¸ö
+		 * @brief ä¸å®¢æˆ·ç«¯äº¤äº’çš„çº¿ç¨‹, æ¯ä¸ªå®¢æˆ·ç«¯å¯¹åº”ä¸€ä¸ª
 		 * @param lpParameter
 		 * @return
 		*/
 		static unsigned int __stdcall RecvThread(LPVOID lpParameter);
 	private:
 		/**
-		 * @brief Ö÷Ì×½Ó×Ö
+		 * @brief ä¸»å¥—æ¥å­—
 		*/
 		SOCKET m_socket;
 		/**
-		 * @brief Ïß³ÌÁĞ±í
+		 * @brief çº¿ç¨‹åˆ—è¡¨
 		*/
 		std::list<HANDLE> m_hThreadHandleLst;
 		/**
-		 * @brief keyÎªÏß³Ìid, valueÎªsocketÃèÊö·ûµÄmap
+		 * @brief keyä¸ºçº¿ç¨‹id, valueä¸ºsocketæè¿°ç¬¦çš„map
 		*/
 		std::map<unsigned int, SOCKET> m_mapThreadIdToSocket;
 		/**
-		 * @brief ½áÊøÅĞ¶Ï±êÖ¾
+		 * @brief ç»“æŸåˆ¤æ–­æ ‡å¿—
 		*/
 		bool m_isStop;
 
 	};
-	//bool TcpServer::m_isStop = false;
-	//SOCKET TcpServer::m_socket = NULL;
 }
 
 #endif // !__TCPSERVER_H__

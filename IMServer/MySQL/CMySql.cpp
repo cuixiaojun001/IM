@@ -4,13 +4,13 @@
 namespace mysql {
 	CMySql::CMySql(void)
 	{
-		/*Õâ¸öº¯ÊýÓÃÀ´·ÖÅä»òÕß³õÊ¼»¯Ò»¸öMYSQL¶ÔÏó£¬ÓÃÓÚÁ¬½Ómysql·þÎñ¶Ë¡£
-		Èç¹ûÄã´«ÈëµÄ²ÎÊýÊÇNULLÖ¸Õë£¬Ëü½«×Ô¶¯ÎªÄã·ÖÅäÒ»¸öMYSQL¶ÔÏó£¬
-		Èç¹ûÕâ¸öMYSQL¶ÔÏóÊÇËü×Ô¶¯·ÖÅäµÄ£¬ÄÇÃ´ÔÚµ÷ÓÃmysql_closeµÄÊ±ºò£¬»áÊÍ·ÅÕâ¸ö¶ÔÏó*/
+		/*è¿™ä¸ªå‡½æ•°ç”¨æ¥åˆ†é…æˆ–è€…åˆå§‹åŒ–ä¸€ä¸ªMYSQLå¯¹è±¡ï¼Œç”¨äºŽè¿žæŽ¥mysqlæœåŠ¡ç«¯ã€‚
+		å¦‚æžœä½ ä¼ å…¥çš„å‚æ•°æ˜¯NULLæŒ‡é’ˆï¼Œå®ƒå°†è‡ªåŠ¨ä¸ºä½ åˆ†é…ä¸€ä¸ªMYSQLå¯¹è±¡ï¼Œ
+		å¦‚æžœè¿™ä¸ªMYSQLå¯¹è±¡æ˜¯å®ƒè‡ªåŠ¨åˆ†é…çš„ï¼Œé‚£ä¹ˆåœ¨è°ƒç”¨mysql_closeçš„æ—¶å€™ï¼Œä¼šé‡Šæ”¾è¿™ä¸ªå¯¹è±¡*/
 		sock = new MYSQL;
 		mysql_init(sock);
 		// mysql_ssl_set(sock, NULL, NULL, NULL, NULL, 0);
-		mysql_set_character_set(sock, "gb2312"); //gb2312 ÖÐ»ªÈËÃñ¹²ºÍ¹ú¼òÌå×Ö±ê×¼
+		mysql_set_character_set(sock, "gb2312"); //gb2312 ä¸­åŽäººæ°‘å…±å’Œå›½ç®€ä½“å­—æ ‡å‡†
 	}
 
 
@@ -33,7 +33,7 @@ namespace mysql {
 
 		if (!mysql_real_connect(sock, host, user, pass, db, nport, NULL, CLIENT_MULTI_STATEMENTS))
 		{
-			//Á¬½Ó´íÎó
+			//è¿žæŽ¥é”™è¯¯
 			fprintf_s(stderr, "Failed to connect to database:Error: %s\n", mysql_error(sock));
 			return false;
 		}
@@ -56,21 +56,21 @@ namespace mysql {
 	}
 	bool CMySql::SelectMySql(const char* szSql, int nColumn, std::list<std::string>& lstStr)
 	{
-		//mysql_query() º¯ÊýÓÃÓÚÏò MySQL ·¢ËÍ²¢Ö´ÐÐ SQL Óï¾ä
+		//mysql_query() å‡½æ•°ç”¨äºŽå‘ MySQL å‘é€å¹¶æ‰§è¡Œ SQL è¯­å¥
 		if (mysql_query(sock, szSql))return false;
 		/**
-		 * @brief mysql_store_result ¶ÔÓÚ³É¹¦¼ìË÷ÁËÊý¾ÝµÄÃ¿¸ö²éÑ¯(SELECT¡¢SHOW¡¢DESCRIBE¡¢EXPLAIN¡¢CHECK TABLEµÈ)
+		 * @brief mysql_store_result å¯¹äºŽæˆåŠŸæ£€ç´¢äº†æ•°æ®çš„æ¯ä¸ªæŸ¥è¯¢(SELECTã€SHOWã€DESCRIBEã€EXPLAINã€CHECK TABLEç­‰)
 		 * @return
-			. CR_COMMANDS_OUT_OF_SYNC ¡¡¡¡ÒÔ²»Ç¡µ±µÄË³ÐòÖ´ÐÐÁËÃüÁî¡£
-	¡¡¡¡		¡¤ CR_OUT_OF_MEMORY ¡¡¡¡		  ÄÚ´æÒç³ö¡£
-	¡¡¡¡		¡¤ CR_SERVER_GONE_ERROR ¡¡¡¡   MySQL·þÎñÆ÷²»¿ÉÓÃ¡£
-	¡¡¡¡		¡¤ CR_SERVER_LOST ¡¡¡¡         ÔÚ²éÑ¯¹ý³ÌÖÐ£¬Óë·þÎñÆ÷µÄÁ¬½Ó¶ªÊ§¡£
-	¡¡¡¡		¡¤ CR_UNKNOWN_ERROR ¡¡¡¡		  ³öÏÖÎ´Öª´íÎó¡£
+			. CR_COMMANDS_OUT_OF_SYNC ã€€ã€€ä»¥ä¸æ°å½“çš„é¡ºåºæ‰§è¡Œäº†å‘½ä»¤ã€‚
+	ã€€ã€€		Â· CR_OUT_OF_MEMORY ã€€ã€€		  å†…å­˜æº¢å‡ºã€‚
+	ã€€ã€€		Â· CR_SERVER_GONE_ERROR ã€€ã€€   MySQLæœåŠ¡å™¨ä¸å¯ç”¨ã€‚
+	ã€€ã€€		Â· CR_SERVER_LOST ã€€ã€€         åœ¨æŸ¥è¯¢è¿‡ç¨‹ä¸­ï¼Œä¸ŽæœåŠ¡å™¨çš„è¿žæŽ¥ä¸¢å¤±ã€‚
+	ã€€ã€€		Â· CR_UNKNOWN_ERROR ã€€ã€€		  å‡ºçŽ°æœªçŸ¥é”™è¯¯ã€‚
 		*/
 		results = mysql_store_result(sock);
 		if (NULL == results)return false;
 		nColumn = mysql_num_fields(results);
-		//±éÀú±íÖÐµÄÏÂÒ»ÐÐ£¬È¡³öÄÚÈÝ·ÅÈërecord ½á¹û¼¯
+		//éåŽ†è¡¨ä¸­çš„ä¸‹ä¸€è¡Œï¼Œå–å‡ºå†…å®¹æ”¾å…¥record ç»“æžœé›†
 		while (record = mysql_fetch_row(results))
 		{
 

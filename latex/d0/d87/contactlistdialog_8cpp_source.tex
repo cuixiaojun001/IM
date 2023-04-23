@@ -1,0 +1,81 @@
+\hypertarget{contactlistdialog_8cpp_source}{}\doxysection{contactlistdialog.\+cpp}
+\label{contactlistdialog_8cpp_source}\index{IMClient/contactlistdialog.cpp@{IMClient/contactlistdialog.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00001}00001 \textcolor{preprocessor}{\#include "{}contactlistdialog.h"{}}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00002}00002 \textcolor{preprocessor}{\#include "{}ui\_contactlistdialog.h"{}}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00003}00003 \textcolor{preprocessor}{\#include <QIcon>}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00004}00004 \textcolor{preprocessor}{\#include "{}QDebug"{}}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00005}00005 \textcolor{preprocessor}{\#include "{}QMessageBox"{}}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00006}00006 ContactListDialog::ContactListDialog(QWidget *parent) :}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00007}00007     QDialog(parent),}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00008}00008     ui(new Ui::\mbox{\hyperlink{classContactListDialog}{ContactListDialog}})}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00009}00009 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00010}00010     ui-\/>setupUi(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00011}00011     setWindowTitle( \textcolor{stringliteral}{"{}IM"{}});}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00012}00012 \textcolor{comment}{//    /*设置窗口最大化和最小化*/}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00013}00013 \textcolor{comment}{//    Qt::WindowFlags windowFlag = this;}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00014}00014 \textcolor{comment}{//    windowFlag |= Qt::WindowMinimizeButtonHint;}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00015}00015 \textcolor{comment}{//    windowFlag |= Qt::WindowMaximizeButtonHint;}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00016}00016 \textcolor{comment}{//    windowFlag |= Qt::WindowCloseButtonHint;}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00017}00017 \textcolor{comment}{//    this.window}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00018}00018 \textcolor{comment}{//    setWindowFlag();}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00019}00019     \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00020}00020     m\_layout = \textcolor{keyword}{new} QVBoxLayout; \textcolor{comment}{// 垂直布局的层}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00021}00021     m\_layout-\/>setContentsMargins( 0 , 0, 0 ,0 ); \textcolor{comment}{//左下右上距离外边框多远}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00022}00022     m\_layout-\/>setSpacing( 3 );\textcolor{comment}{//每个控件彼此的距离}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00023}00023     ui-\/>widget\_frienditem-\/>setLayout(m\_layout);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00024}00024     m\_menu = \textcolor{keyword}{new} QMenu(\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00025}00025     m\_menu-\/>addAction(\textcolor{stringliteral}{"{}添加好友"{}});}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00026}00026     m\_menu-\/>addAction(\textcolor{stringliteral}{"{}系统设置"{}});}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00027}00027     connect(m\_menu, SIGNAL(triggered(QAction*)), \textcolor{keyword}{this}, SLOT(slot\_dealMenu(QAction*)));}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00029}00029 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00031}00031 ContactListDialog::\string~ContactListDialog()}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00032}00032 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00033}00033     \textcolor{keyword}{delete} ui;}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00034}00034 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00036}\mbox{\hyperlink{classContactListDialog_a29ace223c35d8ce674e6cfcd021de7f8}{00036}} \textcolor{keywordtype}{void} \mbox{\hyperlink{classContactListDialog_a29ace223c35d8ce674e6cfcd021de7f8}{ContactListDialog::closeEvent}}(QCloseEvent *event)}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00037}00037 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00038}00038     \textcolor{keywordflow}{if} (QMessageBox::question(\textcolor{keyword}{this}, \textcolor{stringliteral}{"{}提示"{}}, \textcolor{stringliteral}{"{}是否要退出?"{}}) == QMessageBox::Yes) \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00039}00039         Q\_EMIT SIG\_offLine();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00040}00040     \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00041}00041 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00043}00043 \textcolor{keywordtype}{void} ContactListDialog::slot\_addFriend(\mbox{\hyperlink{classUserItem}{UserItem}} *item)}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00044}00044 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00045}00045     m\_layout-\/>addWidget(item);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00046}00046 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00048}00048 \textcolor{keywordtype}{void} ContactListDialog::slot\_setInfo(QString username, \textcolor{keywordtype}{int} iconid = 1, QString feeling = \textcolor{stringliteral}{"{}比较懒, 什么也没写"{}})}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00049}00049 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00050}00050     ui-\/>label\_username-\/>setText(username);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00051}00051     ui-\/>lineEdit\_feeling-\/>setText(feeling);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00052}00052     ui-\/>pb\_icon-\/>setIcon(QIcon(QString(\textcolor{stringliteral}{"{}:/icon/\%1.png"{}}).arg(iconid)));}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00053}00053 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00055}00055 \textcolor{keywordtype}{void} ContactListDialog::slot\_dealMenu(QAction *action)}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00056}00056 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00057}00057     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00058}00058     \textcolor{keywordflow}{if}( action-\/>text() == \textcolor{stringliteral}{"{}添加好友"{}} )}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00059}00059     \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00060}00060         Q\_EMIT SIG\_addFriend();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00061}00061     \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( action-\/>text() == \textcolor{stringliteral}{"{}系统设置"{}} )}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00062}00062     \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00063}00063         \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00064}00064     \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00065}00065 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00066}00066 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00067}00067 \textcolor{keywordtype}{void} ContactListDialog::on\_pb\_menu\_clicked()}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00068}00068 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00069}00069     qDebug() << \_\_func\_\_;}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00070}00070     QPoint p = QCursor::pos();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00071}00071     QSize size = m\_menu-\/>sizeHint(); \textcolor{comment}{//菜单的绝对高度 -\/-\/ 所有的项都弹出之后的高}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00073}00073     m\_menu-\/>exec( QPoint( p.x() , p.y() -\/ size.height() )  );}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00074}00074 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8cpp_source_l00075}00075 }
+
+\end{DoxyCode}

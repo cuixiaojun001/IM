@@ -1,0 +1,357 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ \hypertarget{index_autotoc_md1}{}\doxysection{开发环境}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Visual Studio 2022
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{数据库设计}\label{index_autotoc_md2}
+
+\begin{DoxyItemize}
+\item 用户信息表(暂定\+TODO)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{CREATE} \textcolor{keyword}{TABLE} `t\_user` (}
+\DoxyCodeLine{  `uuid` \textcolor{keywordtype}{bigint}(\textcolor{stringliteral}{20}) unsigned \textcolor{keyword}{NOT} \textcolor{stringliteral}{NULL} AUTO\_INCREMENT,}
+\DoxyCodeLine{  `username` \textcolor{keywordtype}{varchar}(\textcolor{stringliteral}{255}) \textcolor{keyword}{NOT} \textcolor{stringliteral}{NULL},}
+\DoxyCodeLine{  `password` \textcolor{keywordtype}{varchar}(\textcolor{stringliteral}{255}) \textcolor{keyword}{NOT} \textcolor{stringliteral}{NULL},}
+\DoxyCodeLine{  `tel` \textcolor{keywordtype}{varchar}(\textcolor{stringliteral}{255}) \textcolor{keyword}{DEFAULT} \textcolor{stringliteral}{NULL},}
+\DoxyCodeLine{  `icon` \textcolor{keywordtype}{blob},}
+\DoxyCodeLine{  `feeling` \textcolor{keywordtype}{varchar}(\textcolor{stringliteral}{255}) \textcolor{keyword}{DEFAULT} \textcolor{stringliteral}{NULL},}
+\DoxyCodeLine{  \textcolor{keyword}{PRIMARY} KEY (`uuid`)}
+\DoxyCodeLine{) ENGINE=InnoDB AUTO\_INCREMENT=\textcolor{stringliteral}{8} \textcolor{keyword}{DEFAULT} CHARSET=utf8;}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item 好友关系表(暂定\+TODO)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{CREATE} \textcolor{keyword}{TABLE} `t\_friendship` (}
+\DoxyCodeLine{  `uuid` \textcolor{keywordtype}{bigint}(\textcolor{stringliteral}{20}) unsigned \textcolor{keyword}{NOT} \textcolor{stringliteral}{NULL},}
+\DoxyCodeLine{  `friend\_id` \textcolor{keywordtype}{bigint}(\textcolor{stringliteral}{20}) unsigned \textcolor{keyword}{NOT} \textcolor{stringliteral}{NULL},}
+\DoxyCodeLine{  KEY `uuid` (`uuid`),}
+\DoxyCodeLine{  KEY `t\_friendship\_ibfk\_1` (`friend\_id`),}
+\DoxyCodeLine{  \textcolor{keyword}{CONSTRAINT} `t\_friendship\_ibfk\_1` \textcolor{keyword}{FOREIGN} KEY (`friend\_id`) \textcolor{keyword}{REFERENCES} `t\_user` (`uuid`) \textcolor{keyword}{ON} \textcolor{keyword}{DELETE} CASCADE \textcolor{keyword}{ON} \textcolor{keyword}{UPDATE} CASCADE,}
+\DoxyCodeLine{  \textcolor{keyword}{CONSTRAINT} `uuid` \textcolor{keyword}{FOREIGN} KEY (`uuid`) \textcolor{keyword}{REFERENCES} `t\_user` (`uuid`) \textcolor{keyword}{ON} \textcolor{keyword}{DELETE} CASCADE \textcolor{keyword}{ON} \textcolor{keyword}{UPDATE} CASCADE}
+\DoxyCodeLine{) ENGINE=InnoDB \textcolor{keyword}{DEFAULT} CHARSET=utf8;}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md3}{}\doxysection{自定义应用层协议}\label{index_autotoc_md3}
+\hypertarget{index_autotoc_md4}{}\doxysubsection{协议头}\label{index_autotoc_md4}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// 协议头}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PROTOCOL\_BASE (100)}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PROTOCOL\_COUNT (100)}}
+\DoxyCodeLine{\textcolor{comment}{// 注册}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_REGISTER\_RQ   (\_DEF\_PROTOCOL\_BASE + 0 )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_REGISTER\_RS   (\_DEF\_PROTOCOL\_BASE + 1 )}}
+\DoxyCodeLine{\textcolor{comment}{//登录}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_LOGIN\_RQ  (\_DEF\_PROTOCOL\_BASE + 2 )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_LOGIN\_RS  (\_DEF\_PROTOCOL\_BASE + 3 )}}
+\DoxyCodeLine{\textcolor{comment}{//好友信息}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_FRIEND\_INFO   (\_DEF\_PROTOCOL\_BASE + 4 )}}
+\DoxyCodeLine{\textcolor{comment}{//添加好友}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_ADDFRIEND\_RQ  (\_DEF\_PROTOCOL\_BASE + 5 )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_ADDFRIEND\_RS  (\_DEF\_PROTOCOL\_BASE + 6 )}}
+\DoxyCodeLine{\textcolor{comment}{//聊天}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_CHAT\_RQ   (\_DEF\_PROTOCOL\_BASE + 7 )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_CHAT\_RS   (\_DEF\_PROTOCOL\_BASE + 8 )}}
+\DoxyCodeLine{\textcolor{comment}{//离线}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_DEF\_PACK\_OFFLINE\_RQ    (\_DEF\_PROTOCOL\_BASE + 9 )}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md5}{}\doxysection{网络模块}\label{index_autotoc_md5}
+\hypertarget{index_autotoc_md6}{}\doxysubsection{类图}\label{index_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{classDiagram}
+\DoxyCodeLine{class INet \{}
+\DoxyCodeLine{    <<Interface>>}
+\DoxyCodeLine{    + virtual bool InitNet()}
+\DoxyCodeLine{    + virtual void UnInitNet()}
+\DoxyCodeLine{    + virtual bool SendData(unsigned long lSendIP, const char* buf, int nLen)}
+\DoxyCodeLine{    \# virtual void RecvData()}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{class TcpServer \{}
+\DoxyCodeLine{    -\/ SOCKET m\_socket}
+\DoxyCodeLine{    -\/ std::list\string~HANDLE\string~ m\_hThreadHandleLst}
+\DoxyCodeLine{    -\/ std::map\string~unsigned int, SOCKET\string~ m\_mapThreadIdToSocket}
+\DoxyCodeLine{    -\/ bool m\_isStop}
+\DoxyCodeLine{    -\/ static unsigned int \_\_stdcall AcceptThread(LPVOID lpParameter)}
+\DoxyCodeLine{    -\/ static unsigned int \_\_stdcall RecvThread(LPVOID lpParameter)}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{class TcpClient \{}
+\DoxyCodeLine{    -\/ SOCKET m\_socket}
+\DoxyCodeLine{    -\/ HANDLE m\_hThreadHandle}
+\DoxyCodeLine{    -\/ bool m\_isStop}
+\DoxyCodeLine{    -\/ static unsigned int \_\_stdcall RecvThread(LPVOID lpParameter)}
+\DoxyCodeLine{    }
+\DoxyCodeLine{\}}
+\DoxyCodeLine{INet <|.. TcpServer}
+\DoxyCodeLine{}
+\DoxyCodeLine{INet <|.. TcpClient}
+\DoxyCodeLine{}
+\DoxyCodeLine{class INetMediator \{}
+\DoxyCodeLine{    \# INet* m\_pNet}
+\DoxyCodeLine{    -\/ virtual bool OpenNet()}
+\DoxyCodeLine{    -\/ virtual void CloseNet()}
+\DoxyCodeLine{    -\/ virtual bool SendData(unsigned long lSendIP, const char* buf, int nLen)}
+\DoxyCodeLine{    -\/ virtual void DealData(unsigned long lSendIP, const char* buf, int nLen)}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{INetMediator <|.. TcpServerMediator}
+\DoxyCodeLine{INetMediator <|.. TcpClientMediator}
+\DoxyCodeLine{}
+\DoxyCodeLine{INetMediator -\/-\/> INet}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md7}{}\doxysubsection{粘包问题}\label{index_autotoc_md7}
+
+\begin{DoxyItemize}
+\item UDP是用户数据报协议, 在\+UDP协议中, 每个数据报都是不可拆分的, 发多少就接受多少, 接受不了的就直接扔掉
+\item TCP是基于字节流的传输控制协议, 每个数据包是没有明显边界的, 一个数据包可以完整的发出, 也可以被分散到不同的数据包组合成一个包发出, 应用层需要解决粘包问题
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} TcpServer::SendData(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (!buf || nLen <= 0) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{        \textcolor{comment}{// TODO: 防止粘包, 解决办法: 先发包大小, 再发数据包}}
+\DoxyCodeLine{        send(lSendIP, (\textcolor{keywordtype}{char}*)\&nLen, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), 0);}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (send(lSendIP, buf, nLen, 0) <= 0) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} TcpServer::RecvData()}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        Sleep(100);}
+\DoxyCodeLine{        SOCKET sockWaiter = m\_mapThreadIdToSocket[GetCurrentThreadId()];}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (!sockWaiter || sockWaiter == INVALID\_SOCKET) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} nPackSize = 0; \textcolor{comment}{// 存储包大小}}
+\DoxyCodeLine{        }
+\DoxyCodeLine{        \textcolor{keywordtype}{int} iResult = 0;}
+\DoxyCodeLine{        \textcolor{keywordflow}{while} (!m\_isStop) \{}
+\DoxyCodeLine{            \textcolor{comment}{// 先接受包大小 再接受数据包}}
+\DoxyCodeLine{            iResult = recv(sockWaiter, (\textcolor{keywordtype}{char}*)\&nPackSize, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), 0);}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (iResult <= 0) \textcolor{keywordflow}{break};}
+\DoxyCodeLine{            \textcolor{keywordtype}{int} offset = 0; \textcolor{comment}{//从buf开始起始偏移多少}}
+\DoxyCodeLine{            \textcolor{keywordtype}{char}* recvbuf = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[nPackSize];}
+\DoxyCodeLine{            \textcolor{keywordflow}{while} (nPackSize) \{}
+\DoxyCodeLine{                \textcolor{keywordflow}{if} ((iResult = recv(sockWaiter, recvbuf + offset, \textcolor{keyword}{sizeof}(recvbuf), 0)) > 0) \{}
+\DoxyCodeLine{                    \textcolor{comment}{// TODO: 处理数据}}
+\DoxyCodeLine{                    nPackSize -\/= iResult;}
+\DoxyCodeLine{                    offset += iResult;}
+\DoxyCodeLine{                    sockaddr\_in client\_addr;}
+\DoxyCodeLine{                    \textcolor{keywordtype}{int} addrSize = \textcolor{keyword}{sizeof}(client\_addr);}
+\DoxyCodeLine{                    getpeername(sockWaiter, (sockaddr*)\&client\_addr, \&addrSize);}
+\DoxyCodeLine{                    std::cout << \textcolor{stringliteral}{"{}ip["{}} << inet\_ntoa(client\_addr.sin\_addr) << \textcolor{stringliteral}{"{}] says: "{}} << recvbuf << std::endl;}
+\DoxyCodeLine{                \}}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            m\_pMediator-\/>DealData(sockWaiter, recvbuf, offset);}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md8}{}\doxysection{Kernel管理者(\+Singleton)}\label{index_autotoc_md8}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{flowchart TD}
+\DoxyCodeLine{subgraph net}
+\DoxyCodeLine{    subgraph inet }
+\DoxyCodeLine{        TcpServer -\/-\/> INet}
+\DoxyCodeLine{        TcpClient -\/-\/>INet}
+\DoxyCodeLine{    end}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    subgraph mediator}
+\DoxyCodeLine{        TcpServerMediator -\/-\/> INetMediator}
+\DoxyCodeLine{        TcpClientMediator -\/-\/> INetMediator}
+\DoxyCodeLine{    end}
+\DoxyCodeLine{    INetMediator -\/-\/> INet}
+\DoxyCodeLine{    INet -\/-\/> INetMediator}
+\DoxyCodeLine{end}
+\DoxyCodeLine{subgraph mysql}
+\DoxyCodeLine{CMySql}
+\DoxyCodeLine{end}
+\DoxyCodeLine{Kernel -\/-\/> CMySql}
+\DoxyCodeLine{Kernel -\/-\/> INetMediator}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md9}{}\doxysubsection{协议映射表}\label{index_autotoc_md9}
+\begin{quote}
+std\+::function()与std\+::bind()双剑合璧 \end{quote}
+
+\begin{DoxyItemize}
+\item std\+::function() 一个可调用对象包装器。可以容纳除了类成员函数指针之外的所有可调用对象，它可以用统一的方式处理函数、函数对象、函数指针，并允许保存和延迟它们的执行。 std\+::function可以取代函数指针的作用，因为它可以延迟函数的执行，特别适合作为回调函数使用。它比普通函数指针更加的灵活和便利。
+\item std\+::bind()
+
+\texorpdfstring{$>$}{>} 类成员函数有一个默认的this参数, 所以类成员函数不能直接赋值给std\+::function.\+需要结合std\+::bind()使用.
+
+可将std\+::bind()函数看作一个通用的函数适配器, 它接受一个可调用对象, 生成一个新的可调用对象来\char`\"{}适用\char`\"{}原对象的参数列表
+\begin{DoxyItemize}
+\item 作用\+:
+\begin{DoxyEnumerate}
+\item 将可调用对象和其参数绑定成一个仿函数
+\item 只绑定部分参数，减少可调用对象传入的参数
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static} std::map<int, std::function<void(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}, \textcolor{keyword}{const} \textcolor{keywordtype}{char}*, \textcolor{keywordtype}{int})> > m\_deal\_items;  }
+\DoxyCodeLine{\textcolor{preprocessor}{\#define XX(str, func) \{\(\backslash\)  }}
+\DoxyCodeLine{    \textcolor{keyword}{auto} call = std::bind(\&Kernel::func, \textcolor{keyword}{this}, std::placeholders::\_1, std::placeholders::\_2, std::placeholders::\_3); \(\backslash\)  }
+\DoxyCodeLine{    m\_deal\_items.insert(\{ str, call \});\}  }
+\DoxyCodeLine{  }
+\DoxyCodeLine{    XX(\_DEF\_PACK\_LOGIN\_RQ, dealLoginRq);  }
+\DoxyCodeLine{    XX(\_DEF\_PACK\_REGISTER\_RQ, dealRegisterRq);  }
+\DoxyCodeLine{  }
+\DoxyCodeLine{\textcolor{preprocessor}{\#undef XX }}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md10}{}\doxysection{Client端}\label{index_autotoc_md10}
+\hypertarget{index_autotoc_md11}{}\doxysubsection{开发环境}\label{index_autotoc_md11}
+\hypertarget{index_autotoc_md12}{}\doxysubsection{功能分析}\label{index_autotoc_md12}
+\hypertarget{index_autotoc_md13}{}\doxysubsubsection{注册请求\&登录请求}\label{index_autotoc_md13}
+\hypertarget{index_autotoc_md14}{}\doxysubsubsection{添加好友\&显示好友列表}\label{index_autotoc_md14}
+\begin{quote}
+QMenu类\&\#x20;
+
+用于菜单栏、上下文菜单和其他弹出菜单。 \end{quote}
+
+\begin{DoxyItemize}
+\item 动作：
+
+\href{https://doc.qt.io/qt-6/qwidget.html\#addActions}{\texttt{ add\+Actions}}（）-\/-\/\texorpdfstring{$>$}{>}原型：void \+QWidget\+::add\+Actions(const \href{https://doc.qt.io/qt-6/qlist.html}{\texttt{ QList}}\texorpdfstring{$<$}{<}\href{https://doc.qt.io/qt-6/qaction.html}{\texttt{ QAction}} $\ast$\texorpdfstring{$>$}{>} \&$\ast$actions$\ast$)
+
+追加动作$\ast$actions$\ast$到此小部件的操作列表。
+\item 信号： {\ttfamily void QMenu\+::triggered(\+QAction $\ast$action)} 触发此菜单中的操作时会发出此信号。action是导致发出信号的动作。
+\end{DoxyItemize}
+
+\hypertarget{index_autotoc_md15}{}\doxysubsubsection{收发信息}\label{index_autotoc_md15}
+\hypertarget{index_autotoc_md16}{}\doxysubsubsection{离线处理}\label{index_autotoc_md16}
+\begin{quote}
+窗口关闭事件（\+QClose\+Event）是当鼠标点击窗口右上角的关闭按钮时，所触发的函数。如果你没有重写virtual close\+Event(\+QClose\+Event$\ast$event);这个虚函数的话，系统是默认接受关闭事件的，所以就会关闭窗体。但有的时候，我们可能需要保存文本或做一些其他的处理，旧需要重写该函数，用来在窗口关闭之前处理自己需要的事情。 \end{quote}
+\hypertarget{index_autotoc_md17}{}\doxysubsection{Qt UI类}\label{index_autotoc_md17}
+\hypertarget{index_autotoc_md18}{}\doxysubsubsection{QWidget}\label{index_autotoc_md18}
+\begin{quote}
+所有用户界面对象的基类 \end{quote}
+\hypertarget{index_autotoc_md19}{}\doxysubsubsection{QDialog}\label{index_autotoc_md19}
+\begin{quote}
+对话框窗口的基类 \end{quote}
+
+\begin{DoxyItemize}
+\item 作用\+:主要用于短期任务以及和用户进行简要通讯的顶级窗口
+\end{DoxyItemize}\hypertarget{index_autotoc_md20}{}\doxyparagraph{模态对话框}\label{index_autotoc_md20}
+
+\begin{DoxyItemize}
+\item 模态对话框，就是会阻塞同一应用程序中其它窗口的输入。
+\end{DoxyItemize}\hypertarget{index_autotoc_md21}{}\doxyparagraph{非模态对话框}\label{index_autotoc_md21}
+
+\begin{DoxyItemize}
+\item 非模态对话框则在弹出后，可以继续操作主窗口。
+\end{DoxyItemize}\hypertarget{index_autotoc_md22}{}\doxysubsubsection{QMain\+Window}\label{index_autotoc_md22}
+\hypertarget{index_autotoc_md23}{}\doxysection{附加功能}\label{index_autotoc_md23}
+\hypertarget{index_autotoc_md24}{}\doxysubsection{文件传输}\label{index_autotoc_md24}
+\hypertarget{index_autotoc_md25}{}\doxysubsubsection{1. 发送文件流程}\label{index_autotoc_md25}
+
+\begin{DoxyEnumerate}
+\item 发送文件头
+\begin{DoxyItemize}
+\item 包括协议头, 文件唯一标识, 文件名和文件大小.
+\begin{DoxyItemize}
+\item 协议头\+: 标识该数据包是干什么的
+\item 文件唯一标识\+: 区分不同文件的唯一标识
+\begin{DoxyItemize}
+\item 方法：
+\begin{DoxyEnumerate}
+\item MD5
+\item 文件名\+\_\+时间(时间精确到毫秒)
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item 接收端返回确认信息
+\begin{DoxyItemize}
+\item 包括协议头, 文件唯一标识和结果.
+\begin{DoxyItemize}
+\item 文件唯一标识\+: 告诉对方这是对哪个文件的确认信息
+\item 结果\+: 同意接受或不同意
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item 发送文件块
+\begin{DoxyItemize}
+\item 包括协议头, 文件唯一标识, 文件内容和发送的长度
+\begin{DoxyItemize}
+\item 文件唯一标识\+: 标识发送的是哪一个文件
+\item 发送的长度\+: 标识此次发送的长度(发送缓冲区默认大小是64K)
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item 文件读取结束
+\begin{DoxyItemize}
+\item 写入的文件大小等于文件实际大小, 结束接受和发送
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md26}{}\doxysubsubsection{2. 定义文件传输协议}\label{index_autotoc_md26}
+\hypertarget{index_autotoc_md27}{}\doxyparagraph{协议头}\label{index_autotoc_md27}
+\hypertarget{index_autotoc_md28}{}\doxyparagraph{定义协议结构}\label{index_autotoc_md28}
+
+\begin{DoxyEnumerate}
+\item 文件信息请求
+\item 文件信息回复
+\item 文件块请求
+\item 文件块接受回复
+\item 文件信息
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md29}{}\doxysubsubsection{3. 发送文件流程}\label{index_autotoc_md29}
+
+\begin{DoxyEnumerate}
+\item 获取文件信息
+\end{DoxyEnumerate}
+
+\begin{quote}
+创建一个 “打开 ”对话框，允许用户指定要打开的文件或文件集的名称、目录和名称。 BOOL Get\+Open\+File\+NameA( \mbox{[}in, out\mbox{]} LPOPENFILENAMEA unnamed\+Param1 ); 返回值： 类型\+: BOOL 如果用户指定文件名并单击“ 确定 ”按钮，则返回值为非零。 OPENFILENAME 结构的 lpstr\+File 成员指向的缓冲区包含用户指定的完整路径和文件名。 如果用户取消或关闭 “打开 ”对话框或发生错误，则返回值为零。 typedef struct tag\+OFNA \{ // OPENFILENAME 结构体 DWORD l\+Struct\+Size; // 结构体长度 HWND hwnd\+Owner; // 当前窗口的父窗口, 0 居中显示 ...... LPCSTR lpstr\+Filter; // 过滤器, 显示的文件的类型 ...... LPSTR lpstr\+File; // 指向一块缓冲区, 存放被选择文件的完整路径 DWORD n\+Max\+File; // lpstr\+File 指向的缓冲区的大小 ...... DWORD Flags; // 一组可用于初始化对话框的位标志 ...... \} OPENFILENAMEA, $\ast$\+LPOPENFILENAMEA; \end{quote}
+
+\begin{DoxyEnumerate}
+\item 发送文件信息请求
+\item 从文件路径中获取文件名
+\item 发送消息块
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md30}{}\doxysubsubsection{4. 接受文件流程}\label{index_autotoc_md30}
+
+\begin{DoxyEnumerate}
+\item 处理文件信息请求
+\end{DoxyEnumerate}
+
+\begin{quote}
+创建“ 保存 ”对话框，允许用户指定要保存的文件的驱动器、目录和名称。 BOOL Get\+Save\+File\+NameA( \mbox{[}in, out\mbox{]} LPOPENFILENAMEA unnamed\+Param1 ); {\ttfamily void \mbox{\hyperlink{classKernel_a6f2e1f9ad7f235aa62a7173af96d7175}{Kernel\+::\+Deal\+File\+Info\+Rq(unsigned long l\+Send\+IP, const char$\ast$ buf, int n\+Len)}};} \end{quote}
+
+\begin{DoxyEnumerate}
+\item 处理文件块请求 {\ttfamily void \mbox{\hyperlink{classKernel_aa9259e7ab3d47dd07a47e9d1c3596f7b}{Kernel\+::\+Deal\+File\+Block\+Rq(unsigned long l\+Send\+IP, const char$\ast$ buf, int n\+Len)}};}
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md31}{}\doxysubsection{Qt客户端$<$\+QFile\+Dialog$>$\+API打开文件对话框}\label{index_autotoc_md31}
+
+\begin{DoxyItemize}
+\item get\+Open\+File\+Name返回一个被用户选中的文件的路径，前提是这个文件是存在的。
+\item get\+Save\+File\+Name返回一个被用户选中的文件的路径，这个文件可以是不存在的。
+\item get\+Open\+File\+Names返回一个或多个被用户选中的文件的路径，前提是这些文件是存在的。
+\end{DoxyItemize}\hypertarget{index_autotoc_md32}{}\doxysubsection{客户端移植到\+Qt}\label{index_autotoc_md32}
+\hypertarget{index_autotoc_md33}{}\doxysubsubsection{Qt客户端$<$\+QFile\+Dialog$>$\+API打开文件对话框}\label{index_autotoc_md33}
+
+\begin{DoxyItemize}
+\item get\+Open\+File\+Name返回一个被用户选中的文件的路径，前提是这个文件是存在的。
+\item get\+Save\+File\+Name返回一个被用户选中的文件的路径，这个文件可以是不存在的。
+\item get\+Open\+File\+Names返回一个或多个被用户选中的文件的路径，前提是这些文件是存在的。
+\end{DoxyItemize}\hypertarget{index_autotoc_md34}{}\doxysubsubsection{客户端处理流程}\label{index_autotoc_md34}
+\hypertarget{index_autotoc_md35}{}\doxysubsubsection{优化\+TODO}\label{index_autotoc_md35}
+
+\begin{DoxyItemize}
+\item 如果好友在同意接受后突然下线, 需要保存断点
+\end{DoxyItemize}
+
+
+
+添加好友字符集 

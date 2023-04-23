@@ -1,0 +1,94 @@
+\hypertarget{kernel_8h_source}{}\doxysection{kernel.\+h}
+\label{kernel_8h_source}\index{IMClient/kernel.h@{IMClient/kernel.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef \_\_KERNEL\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00002}00002 \textcolor{preprocessor}{\#define \_\_KERNEL\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00006}00006 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00007}00007 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00008}00008 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00009}00009 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00011}00011 \textcolor{preprocessor}{\#include "{}INetMediator.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00012}00012 \textcolor{preprocessor}{\#include "{}packdef.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00013}00013 \textcolor{preprocessor}{\#include "{}logindialog.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00014}00014 \textcolor{preprocessor}{\#include "{}contactlistdialog.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00015}00015 \textcolor{preprocessor}{\#include "{}chatdialog.h"{}}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00017}\mbox{\hyperlink{classKernel}{00017}} \textcolor{keyword}{class }\mbox{\hyperlink{classKernel}{Kernel}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00018}00018 \{}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00019}00019     Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00020}00020 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00021}00021     \mbox{\hyperlink{classKernel}{Kernel}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00022}00022     \mbox{\hyperlink{classKernel}{\string~Kernel}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00023}00023 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00024}00024 \textcolor{comment}{//    static Kernel\& getInstance() \{}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00025}00025 \textcolor{comment}{//        return kernel;}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00026}00026 \textcolor{comment}{//    \}}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00027}00027 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00032}00032     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classKernel_a3b1172f795a20d490ca002ff6dddac6c}{startServer}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00036}00036     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a77298443ac5447e2a04815869f30ae71}{closeServer}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00043}00043  \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00044}00044     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a8e0dbecd3c1d2ff4dabeacb7d7eb0f5e}{slot\_DealData}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00051}00051     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a204549737919e8ebc064a9b7ef62298d}{slot\_LoginRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00058}00058     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a2555f51837e8512a0fe30d3b13ff7c7e}{slot\_RegisterRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00065}00065     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a7da6ecfc46ef1ed89eeb1b9cc0b8dcc7}{slot\_FriendInfoRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00072}00072     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a469be53950174972d58ae6f196d27473}{slot\_ChatRq}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00079}00079     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a2e80c738deb690b807163f9d6a31ee30}{slot\_ChatRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00086}00086     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a729b2f219529bec7e0eda1dbe2b8fb58}{slot\_addFriendRq}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00093}00093     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a7b391301f52d2d008f513e5cb4020f3c}{slot\_addFriendRs}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00094}00094 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00095}00095     \textcolor{keywordtype}{void} slot\_DealFileInfoRq(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00097}00097     \textcolor{keywordtype}{void} slot\_DealFileInfoRs(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00098}00098 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00099}00099     \textcolor{keywordtype}{void} slot\_DealFileBlockRq(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00101}00101     \textcolor{keywordtype}{void} slot\_DealFileBlockRs(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00107}00107     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a646a42de48aea4a2bd267e0f771efa5e}{slot\_LoginCommit}}(QString username, QString password);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00114}00114     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_aec00bbd36ea67f285fc2e516fef520b9}{slot\_RegisterCommit}}(QString username, QString tel, QString password);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00119}00119     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a773bea13586e584bb49be5d05b4ea5dc}{slot\_userItemClicked}}(\textcolor{keywordtype}{int} uuid);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00125}00125     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_ae8053324f7683214e8b197ce56179e53}{slot\_SendChatMsg}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, QString content);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00129}00129     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a5e02453ee98926ad2d0937ccf422f470}{slot\_addFriendClicked}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00136}00136     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_afa81914f904d8da74bda000828cc36fa}{slot\_SendFile}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, QString filename, uint64\_t filesize);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00143}00143     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a77bce2e146702fc88f5fe593c1df2ada}{slot\_DealOffineRq}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} lSendIP, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* buf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00147}00147     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a802c41d00fdf0596413ab5e9b3419129}{slot\_SendOffline}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00148}00148 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00152}00152     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_ad708fafef69b068730e27ea5fdc4fbeb}{setProtocolMap}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00159}00159     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a2952e7d3f8da8a67b0baf04d9575bc00}{Utf8ToGB2312}}(QString \&utf8, \textcolor{keywordtype}{char}* gbbuf, \textcolor{keywordtype}{int} nLen);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00165}00165     QString \mbox{\hyperlink{classKernel_a391d4b503cc61cc9a3f890180248bcb2}{GB2312ToUtf8}}(\textcolor{keywordtype}{char}* gbbuf);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00171}00171     std::string \mbox{\hyperlink{classKernel_adff83ffd06f1c450798e393d2cc4101b}{GetFileName}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* path);}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00172}00172 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00176}00176     \textcolor{keywordtype}{void} \mbox{\hyperlink{classKernel_a44efeb221696f2645825839573ac3431}{DestroyInstance}}();}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00177}00177 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00178}00178 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00179}00179 \textcolor{comment}{//    static Kernel kernel;}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00180}00180     std::map<int, std::function<void(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}, \textcolor{keyword}{const} \textcolor{keywordtype}{char}*, \textcolor{keywordtype}{int})> > m\_deal\_items;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00181}00181     net::INetMediator* m\_pClient;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00182}00182 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00183}00183     \textcolor{comment}{// UI对象指针}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00184}00184     \mbox{\hyperlink{classLoginDialog}{LoginDialog}} *m\_loginDialog;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00185}00185     \mbox{\hyperlink{classContactListDialog}{ContactListDialog}}* m\_mainWnd;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00186}00186 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00187}00187     \textcolor{comment}{// 个人信息}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00188}00188     \textcolor{keywordtype}{int} m\_uuid;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00189}00189     QString m\_username;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00190}00190     \textcolor{keywordtype}{int} m\_state;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00191}00191     QString m\_feeling;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00192}00192 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00193}00193     \textcolor{comment}{// 用户id与item的映射map}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00194}00194     std::map<int, UserItem*> m\_mapIdToUserItem;}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00198}\mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{00198}}     std::map<int, ChatDialog*> \mbox{\hyperlink{classKernel_abbe8b70e4c6abdf8fca0c110bd12b1c4}{m\_mapIdToChatDialog}};}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00199}00199 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00200}\mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{00200}}     std::map<std::string, FileInfo*> \mbox{\hyperlink{classKernel_a9a93139b33ddce8ddd83de0a5c51a9b9}{m\_mapFileIdToFileInfo}};}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00201}00201 \};}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00202}00202 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00203}00203 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// !\_\_KERNEL\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00204}00204 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00205}00205 }
+\DoxyCodeLine{\Hypertarget{kernel_8h_source_l00206}00206 }
+
+\end{DoxyCode}

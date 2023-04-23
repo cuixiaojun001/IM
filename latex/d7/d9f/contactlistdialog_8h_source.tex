@@ -1,0 +1,43 @@
+\hypertarget{contactlistdialog_8h_source}{}\doxysection{contactlistdialog.\+h}
+\label{contactlistdialog_8h_source}\index{IMClient/contactlistdialog.h@{IMClient/contactlistdialog.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef CONTACTLISTDIALOG\_H}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00002}00002 \textcolor{preprocessor}{\#define CONTACTLISTDIALOG\_H}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00005}00005 \textcolor{preprocessor}{\#include <QMenu>}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00006}00006 \textcolor{preprocessor}{\#include <QAction>}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00007}00007 \textcolor{preprocessor}{\#include <QVBoxLayout>}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00008}00008 \textcolor{preprocessor}{\#include "{}useritem.h"{}}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00009}00009 \textcolor{keyword}{namespace }Ui \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00010}00010 \textcolor{keyword}{class }\mbox{\hyperlink{classContactListDialog}{ContactListDialog}};}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00011}00011 \}}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00013}\mbox{\hyperlink{classContactListDialog}{00013}} \textcolor{keyword}{class }\mbox{\hyperlink{classContactListDialog}{ContactListDialog}} : \textcolor{keyword}{public} QDialog}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00014}00014 \{}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00015}00015     Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00016}00016 signals:}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00017}00017     \textcolor{keywordtype}{void} SIG\_addFriend();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00018}00018     \textcolor{keywordtype}{void} SIG\_offLine();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00019}00019 \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00020}00020     \textcolor{keyword}{explicit} \mbox{\hyperlink{classContactListDialog}{ContactListDialog}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00021}00021     \mbox{\hyperlink{classContactListDialog}{\string~ContactListDialog}}();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00027}00027     \textcolor{keywordtype}{void} \mbox{\hyperlink{classContactListDialog_a29ace223c35d8ce674e6cfcd021de7f8}{closeEvent}}(QCloseEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00028}00028 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00029}00029     \textcolor{keywordtype}{void} slot\_addFriend(\mbox{\hyperlink{classUserItem}{UserItem}}* item);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00030}00030     \textcolor{keywordtype}{void} slot\_setInfo(QString username, \textcolor{keywordtype}{int} iconid, QString feeling);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00032}00032 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00033}00033     \textcolor{keywordtype}{void} on\_pb\_menu\_clicked();}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00034}00034     \textcolor{keywordtype}{void} slot\_dealMenu(QAction* action);}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00035}00035 \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00036}00036     Ui::ContactListDialog *ui;}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00037}00037     QVBoxLayout* m\_layout;}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00038}00038     QMenu* m\_menu;}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00039}00039 \};}
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{contactlistdialog_8h_source_l00041}00041 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CONTACTLISTDIALOG\_H}}
+
+\end{DoxyCode}

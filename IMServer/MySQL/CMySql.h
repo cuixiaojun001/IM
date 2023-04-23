@@ -14,37 +14,37 @@ namespace mysql {
 		~CMySql(void);
 	public:
 		/**
-		 * @brief Á¬½ÓÊı¾İ¿â
+		 * @brief è¿æ¥æ•°æ®åº“
 		 * @param host ip
-		 * @param user ÓÃ»§Ãû
-		 * @param pass ÃÜÂë
-		 * @param db Êı¾İ¿â
-		 * @param nport ¶Ë¿ÚºÅ
-		 * @return ³É¹¦·µ»Øtrue; Ê§°Ü·µ»Øfalse
+		 * @param user ç”¨æˆ·å
+		 * @param pass å¯†ç 
+		 * @param db æ•°æ®åº“
+		 * @param nport ç«¯å£å·
+		 * @return æˆåŠŸè¿”å›true; å¤±è´¥è¿”å›false
 		*/
 		bool ConnectMySql(const char* host, const char* user, const char* pass, const char* db, short nport = 3306);
 		/**
-		 * @brief ¶Ï¿ªÁ¬½Ó
+		 * @brief æ–­å¼€è¿æ¥
 		*/
 		void  DisConnect();
 		/**
-		 * @brief ²éÑ¯Êı¾İ¿â
-		 * @param[in] szSql ²éÑ¯Óï¾ä»º³åÇø
-		 * @param[in] nColumn Êı¾İ¿âµÄÁĞÊı
-		 * @param[out] lstStr Êä³ö²ÎÊı:²éÑ¯½á¹û
+		 * @brief æŸ¥è¯¢æ•°æ®åº“
+		 * @param[in] szSql æŸ¥è¯¢è¯­å¥ç¼“å†²åŒº
+		 * @param[in] nColumn æ•°æ®åº“çš„åˆ—æ•°
+		 * @param[out] lstStr è¾“å‡ºå‚æ•°:æŸ¥è¯¢ç»“æœ
 		 * @return
 		*/
 		bool  SelectMySql(const char* szSql, int nColumn, std::list<std::string>& lstStr);
 		/**
-		 * @brief »ñµÃÊı¾İ¿âÖĞµÄ±í
-		 * @param szSql ²éÑ¯Óï¾ä»º³åÇø
-		 * @param lstStr Êä³ö²ÎÊı:²éÑ¯½á¹û
+		 * @brief è·å¾—æ•°æ®åº“ä¸­çš„è¡¨
+		 * @param szSql æŸ¥è¯¢è¯­å¥ç¼“å†²åŒº
+		 * @param lstStr è¾“å‡ºå‚æ•°:æŸ¥è¯¢ç»“æœ
 		 * @return
 		*/
 		bool GetTables(const char* szSql, std::list<std::string>& lstStr);
 		/**
-		 * @brief ¸üĞÂ£ºÉ¾³ı¡¢²åÈë¡¢ĞŞ¸Ä
-		 * @param szSql ²éÑ¯Óï¾ä»º³åÇø
+		 * @brief æ›´æ–°ï¼šåˆ é™¤ã€æ’å…¥ã€ä¿®æ”¹
+		 * @param szSql æŸ¥è¯¢è¯­å¥ç¼“å†²åŒº
 		 * @return
 		*/
 		bool  UpdateMySql(const char* szSql);
